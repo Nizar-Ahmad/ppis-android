@@ -27,6 +27,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.isSystemInDarkTheme
 import com.thevirtualtrust.ppis.R
 
 object PPISSpacing {
@@ -98,7 +99,9 @@ fun PPISPageHeader(title: String, description: String? = null) {
             }
         }
         Image(
-            painter = painterResource(R.drawable.ppis_logo),
+            painter = painterResource(
+                if (isSystemInDarkTheme()) R.drawable.ppis_dark else R.drawable.ppis_light
+            ),
             contentDescription = "PPIS",
             modifier = Modifier.padding(top = PPISSpacing.xxs).size(48.dp),
             contentScale = ContentScale.Fit
