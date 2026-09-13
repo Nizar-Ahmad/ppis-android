@@ -22,3 +22,5 @@ build/
 *.keystore
 .env
 .env.*
+tools/mobile_project_dump.py
+project_dump_mobile.txt
