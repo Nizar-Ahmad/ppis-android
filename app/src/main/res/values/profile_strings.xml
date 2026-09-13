@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="profile_show_more_sessions">Show %1$d more sessions</string>
+    <string name="profile_show_fewer_sessions">Show fewer sessions</string>
 
     <string name="profile_title">Profile</string>
     <string name="profile_description">Account, preferences, security and active sessions.</string>

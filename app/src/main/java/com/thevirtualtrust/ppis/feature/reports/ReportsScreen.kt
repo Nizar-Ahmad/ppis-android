@@ -28,6 +28,7 @@ import com.thevirtualtrust.ppis.data.analytics.MonthlyAnalytics
 import com.thevirtualtrust.ppis.data.analytics.WeeklyAnalytics
 import com.thevirtualtrust.ppis.data.analytics.WeeklyInsight
 import com.thevirtualtrust.ppis.ui.components.SectionHeader
+import com.thevirtualtrust.ppis.ui.components.PPISPageHeader
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.Locale
@@ -61,7 +62,7 @@ fun ReportsScreen(
             )
     ) {
 
-        SectionHeader(
+        PPISPageHeader(
             title = stringResource(R.string.reports_title),
             description = state.timezone?.let { timezone ->
                 stringResource(R.string.reports_timezone, timezone)

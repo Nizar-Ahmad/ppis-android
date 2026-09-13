@@ -44,6 +44,7 @@ import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
 import com.google.android.libraries.identity.googleid.GoogleIdTokenParsingException
 import com.thevirtualtrust.ppis.BuildConfig
 import com.thevirtualtrust.ppis.R
+import com.thevirtualtrust.ppis.ui.components.ppisOutlinedTextFieldColors
 import kotlinx.coroutines.launch
 
 @Composable
@@ -170,6 +171,7 @@ fun LoginScreen(
                 true,
             enabled =
                 !isBusy,
+            colors = ppisOutlinedTextFieldColors(),
             keyboardOptions =
                 KeyboardOptions(
                     keyboardType =
@@ -239,6 +241,7 @@ fun LoginScreen(
                     )
                 }
             },
+            colors = ppisOutlinedTextFieldColors(),
             keyboardOptions =
                 KeyboardOptions(
                     keyboardType =

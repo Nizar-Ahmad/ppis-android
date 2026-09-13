@@ -23,6 +23,7 @@ import com.thevirtualtrust.ppis.ui.components.EmptyState
 import com.thevirtualtrust.ppis.ui.components.LoadingState
 import com.thevirtualtrust.ppis.ui.components.MetricRow
 import com.thevirtualtrust.ppis.ui.components.PPISCard
+import com.thevirtualtrust.ppis.ui.components.PPISPageHeader
 import com.thevirtualtrust.ppis.ui.components.PPISScreen
 import com.thevirtualtrust.ppis.ui.components.PPISSpacing
 import com.thevirtualtrust.ppis.ui.components.ScoreIndicator
@@ -39,7 +40,7 @@ fun HomeScreen(
     val state by viewModel.uiState.collectAsStateWithLifecycle()
 
     PPISScreen(modifier) {
-        SectionHeader(
+        PPISPageHeader(
             title = stringResource(R.string.home_title),
             description = state.entryDate?.format(
                 DateTimeFormatter.ofPattern("EEEE, d MMMM", LocalConfiguration.current.locales[0])

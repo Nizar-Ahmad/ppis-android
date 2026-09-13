@@ -21,12 +21,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.thevirtualtrust.ppis.R
 import com.thevirtualtrust.ppis.ui.components.LoadingState
 import com.thevirtualtrust.ppis.ui.components.PPISCard
+import com.thevirtualtrust.ppis.ui.components.PPISPageHeader
 import com.thevirtualtrust.ppis.ui.components.PPISSpacing
 import com.thevirtualtrust.ppis.ui.components.SectionHeader
 import com.thevirtualtrust.ppis.ui.components.StatusChip
@@ -65,22 +68,9 @@ fun TrackScreen(
             )
     ) {
 
-        Text(
-            text =
-                stringResource(
-                    R.string.track_title
-                ),
-            style =
-                MaterialTheme
-                    .typography
-                    .headlineMedium
-        )
-
-        Text(
-            text =
-                stringResource(
-                    R.string.track_description
-                )
+        PPISPageHeader(
+            title = stringResource(R.string.track_title),
+            description = stringResource(R.string.track_description)
         )
 
         HorizontalDivider()
@@ -134,6 +124,7 @@ fun TrackScreen(
                 ),
             selected =
                 state.mood,
+            symbols = listOf("☹", "◔", "○", "◕", "☺"),
             enabled =
                 state.canEdit,
             onSelected =
@@ -152,6 +143,7 @@ fun TrackScreen(
                 ),
             selected =
                 state.energyLevel,
+            symbols = listOf("◌", "◔", "◑", "◕", "●"),
             enabled =
                 state.canEdit,
             onSelected =
@@ -456,6 +448,7 @@ private fun ScaleSelector(
     title: String,
     description: String,
     selected: Int,
+    symbols: List<String>,
     enabled: Boolean,
     onSelected:
         (Int) -> Unit
@@ -503,6 +496,8 @@ private fun ScaleSelector(
                 (1..5).forEach {
                         value ->
 
+                    val accessibilityLabel = scaleLabel(value)
+
                     if (
                         selected ==
                             value
@@ -510,9 +505,9 @@ private fun ScaleSelector(
 
                         Button(
                             modifier =
-                                Modifier.weight(
-                                    1f
-                                ),
+                                Modifier.weight(1f).semantics {
+                                    contentDescription = "$title: $accessibilityLabel"
+                                },
                             enabled =
                                 enabled,
                             onClick = {
@@ -523,9 +518,7 @@ private fun ScaleSelector(
                         ) {
 
                             Text(
-                                text =
-                                    value
-                                        .toString()
+                                text = "${symbols.getOrElse(value - 1) { value.toString() }} $value"
                             )
                         }
 
@@ -533,9 +526,9 @@ private fun ScaleSelector(
 
                         OutlinedButton(
                             modifier =
-                                Modifier.weight(
-                                    1f
-                                ),
+                                Modifier.weight(1f).semantics {
+                                    contentDescription = "$title: $accessibilityLabel"
+                                },
                             enabled =
                                 enabled,
                             onClick = {
@@ -546,9 +539,7 @@ private fun ScaleSelector(
                         ) {
 
                             Text(
-                                text =
-                                    value
-                                        .toString()
+                                text = "${symbols.getOrElse(value - 1) { value.toString() }} $value"
                             )
                         }
                     }
