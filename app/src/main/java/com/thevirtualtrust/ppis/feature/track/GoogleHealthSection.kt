@@ -28,7 +28,10 @@ import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.thevirtualtrust.ppis.R
+import com.thevirtualtrust.ppis.data.googlehealth.GoogleHealthSyncSummary
 import com.thevirtualtrust.ppis.ui.components.IntegrationHeader
+import com.thevirtualtrust.ppis.ui.components.MetricRow
+import com.thevirtualtrust.ppis.ui.components.PPISCard
 import com.thevirtualtrust.ppis.ui.components.StatusChip
 
 
@@ -314,22 +317,6 @@ fun GoogleHealthSection(
                             )
                         }
 
-                    state.lastSync
-                        ?.let {
-                                summary ->
-
-                            Text(
-                                stringResource(
-                                    R.string
-                                        .google_health_sync_summary,
-                                    summary.daysRequested,
-                                    summary.daysImported,
-                                    summary.daysSkipped,
-                                    summary.daysWithoutData
-                                )
-                            )
-                        }
-
                     Button(
                         modifier =
                             Modifier.fillMaxWidth(),
@@ -447,6 +434,35 @@ fun GoogleHealthSection(
                         )
                     }
                 }
+        }
+    }
+
+    if (state.status == GoogleHealthUiStatus.CONNECTED) {
+        state.lastSync?.let { summary ->
+            GoogleHealthSyncDataCard(summary)
+        }
+    }
+}
+
+@Composable
+private fun GoogleHealthSyncDataCard(
+    summary: GoogleHealthSyncSummary
+) {
+    PPISCard(containerColor = MaterialTheme.colorScheme.surfaceVariant) {
+        Text(
+            text = "Latest Google Health sync",
+            style = MaterialTheme.typography.titleMedium
+        )
+        Text(
+            text = "Imported daily health records from the most recent sync.",
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onSurfaceVariant
+        )
+        MetricRow(label = "Days requested", value = summary.daysRequested.toString())
+        MetricRow(label = "Days imported", value = summary.daysImported.toString())
+        MetricRow(label = "Days without data", value = summary.daysWithoutData.toString())
+        if (summary.daysSkipped > 0) {
+            MetricRow(label = "Days skipped", value = summary.daysSkipped.toString())
         }
     }
 }

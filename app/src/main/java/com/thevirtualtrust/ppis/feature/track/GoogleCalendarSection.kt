@@ -23,7 +23,10 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.thevirtualtrust.ppis.R
+import com.thevirtualtrust.ppis.data.googlecalendar.GoogleCalendarSyncSummary
 import com.thevirtualtrust.ppis.ui.components.IntegrationHeader
+import com.thevirtualtrust.ppis.ui.components.MetricRow
+import com.thevirtualtrust.ppis.ui.components.PPISCard
 import com.thevirtualtrust.ppis.ui.components.StatusChip
 
 @Composable
@@ -190,6 +193,35 @@ fun GoogleCalendarSection(
             }
         }
     }
+
+    if (state.status == GoogleCalendarUiStatus.CONNECTED) {
+        state.lastSync?.let { summary ->
+            GoogleCalendarSyncDataCard(summary)
+        }
+    }
+}
+
+@Composable
+private fun GoogleCalendarSyncDataCard(
+    summary: GoogleCalendarSyncSummary
+) {
+    PPISCard(containerColor = MaterialTheme.colorScheme.surfaceVariant) {
+        Text(
+            text = "Latest Google Calendar sync",
+            style = MaterialTheme.typography.titleMedium
+        )
+        Text(
+            text = "Changes from the most recent calendar import.",
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onSurfaceVariant
+        )
+        MetricRow(label = "Calendars checked", value = summary.calendarsChecked.toString())
+        MetricRow(label = "Events added", value = summary.eventsCreated.toString())
+        MetricRow(label = "Events updated", value = summary.eventsUpdated.toString())
+        if (summary.eventsSkipped > 0) {
+            MetricRow(label = "Events skipped", value = summary.eventsSkipped.toString())
+        }
+    }
 }
 
 @Composable
@@ -306,27 +338,6 @@ private fun ConnectedGoogleCalendarContent(
                         R.string
                             .google_calendar_token_expiry,
                         expiresAt
-                    )
-            )
-        }
-
-    state.lastSync
-        ?.let {
-                summary ->
-
-            Text(
-                text =
-                    stringResource(
-                        R.string
-                            .google_calendar_sync_summary,
-                        summary
-                            .calendarsChecked,
-                        summary
-                            .eventsCreated,
-                        summary
-                            .eventsUpdated,
-                        summary
-                            .eventsSkipped
                     )
             )
         }
