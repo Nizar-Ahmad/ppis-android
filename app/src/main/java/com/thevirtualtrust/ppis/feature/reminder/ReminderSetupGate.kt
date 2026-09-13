@@ -1,8 +1,10 @@
 package com.thevirtualtrust.ppis.feature.reminder
 
 import android.Manifest
+import android.app.TimePickerDialog
 import android.content.pm.PackageManager
 import android.os.Build
+import android.text.format.DateFormat
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Arrangement
@@ -11,13 +13,11 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -25,12 +25,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.thevirtualtrust.ppis.R
+import com.thevirtualtrust.ppis.ui.components.PPISCard
+import com.thevirtualtrust.ppis.ui.components.PPISPageHeader
+import com.thevirtualtrust.ppis.ui.components.PPISSpacing
 
 @Composable
 fun ReminderSetupGate(
@@ -127,54 +129,29 @@ private fun ReminderSetupScreen(
                 ) ==
             PackageManager.PERMISSION_GRANTED
 
+    val timeParts = state.timeText.split(":")
+    val hour = timeParts.getOrNull(0)?.toIntOrNull() ?: 20
+    val minute = timeParts.getOrNull(1)?.toIntOrNull() ?: 0
+
     Column(
         modifier =
             modifier
                 .fillMaxSize()
                 .padding(
-                    24.dp
+                    PPISSpacing.lg
                 ),
         verticalArrangement =
             Arrangement.spacedBy(
-                18.dp
+                    PPISSpacing.lg
             )
     ) {
 
-        Text(
-            text =
-                stringResource(
-                    R.string
-                        .reminder_setup_title
-                ),
-            style =
-                MaterialTheme
-                    .typography
-                    .headlineMedium
+        PPISPageHeader(
+            title = stringResource(R.string.reminder_setup_title),
+            description = "Choose when you'd like a quick reminder for your optional daily check-in."
         )
 
-        Text(
-            text =
-                stringResource(
-                    R.string
-                        .reminder_setup_description
-                )
-        )
-
-        Card(
-            modifier =
-                Modifier.fillMaxWidth()
-        ) {
-
-            Column(
-                modifier =
-                    Modifier.padding(
-                        16.dp
-                    ),
-                verticalArrangement =
-                    Arrangement.spacedBy(
-                        8.dp
-                    )
-            ) {
+        PPISCard {
 
                 Text(
                     text =
@@ -195,45 +172,32 @@ private fun ReminderSetupScreen(
                                 .reminder_telemetry_independent_description
                         )
                 )
-            }
         }
 
-        OutlinedTextField(
-            modifier =
-                Modifier.fillMaxWidth(),
-            value =
-                state.timeText,
-            onValueChange =
-                viewModel::
-                    onTimeChanged,
-            enabled =
-                !state.isSaving,
-            singleLine =
-                true,
-            keyboardOptions =
-                KeyboardOptions(
-                    keyboardType =
-                        KeyboardType.Number
-                ),
-            label = {
-                Text(
-                    text =
-                        stringResource(
-                            R.string
-                                .reminder_time_label
-                        )
-                )
-            },
-            supportingText = {
-                Text(
-                    text =
-                        stringResource(
-                            R.string
-                                .reminder_time_help
-                        )
-                )
+        PPISCard(containerColor = MaterialTheme.colorScheme.primaryContainer) {
+            Text(stringResource(R.string.reminder_time_label), style = MaterialTheme.typography.titleMedium)
+            OutlinedButton(
+                modifier = Modifier.fillMaxWidth(),
+                enabled = !state.isSaving,
+                onClick = {
+                    TimePickerDialog(
+                        context,
+                        { _, selectedHour, selectedMinute ->
+                            viewModel.onTimeChanged("%02d:%02d".format(selectedHour, selectedMinute))
+                        },
+                        hour,
+                        minute,
+                        DateFormat.is24HourFormat(context)
+                    ).show()
+                }
+            ) {
+                Text(DateFormat.getTimeFormat(context).format(java.util.Calendar.getInstance().apply {
+                    set(java.util.Calendar.HOUR_OF_DAY, hour)
+                    set(java.util.Calendar.MINUTE, minute)
+                }.time), style = MaterialTheme.typography.headlineSmall)
             }
-        )
+            Text("Tap the time to choose an hour and minute.", style = MaterialTheme.typography.bodyMedium)
+        }
 
         state.error?.let {
                 error ->

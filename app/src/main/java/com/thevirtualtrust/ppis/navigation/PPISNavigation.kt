@@ -7,9 +7,11 @@ import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -19,6 +21,7 @@ import com.thevirtualtrust.ppis.feature.home.HomeScreen
 import com.thevirtualtrust.ppis.feature.profile.ProfileScreen
 import com.thevirtualtrust.ppis.feature.reports.ReportsScreen
 import com.thevirtualtrust.ppis.feature.track.TrackScreen
+import com.thevirtualtrust.ppis.R
 
 @Composable
 fun PPISNavigation() {
@@ -57,8 +60,16 @@ fun PPISNavigation() {
                             }
                         },
                         icon = {
-                            Text(
-                                text = destination.shortLabel
+                            Icon(
+                                painter = painterResource(
+                                    when (destination) {
+                                        MainDestination.HOME -> R.drawable.ic_nav_home
+                                        MainDestination.TRACK -> R.drawable.ic_nav_track
+                                        MainDestination.REPORTS -> R.drawable.ic_nav_reports
+                                        MainDestination.PROFILE -> R.drawable.ic_nav_profile
+                                    }
+                                ),
+                                contentDescription = destination.label
                             )
                         },
                         label = {

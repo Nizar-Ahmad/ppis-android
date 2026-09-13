@@ -15,6 +15,7 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Slider
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -33,6 +34,7 @@ import com.thevirtualtrust.ppis.ui.components.PPISPageHeader
 import com.thevirtualtrust.ppis.ui.components.PPISSpacing
 import com.thevirtualtrust.ppis.ui.components.SectionHeader
 import com.thevirtualtrust.ppis.ui.components.StatusChip
+import java.util.Locale
 
 @Composable
 fun TrackScreen(
@@ -124,7 +126,8 @@ fun TrackScreen(
                 ),
             selected =
                 state.mood,
-            symbols = listOf("☹", "◔", "○", "◕", "☺"),
+            symbols = listOf("☹", "◔", "○", "◡", "☺"),
+            labels = listOf("Very low", "Low", "Okay", "Good", "Great"),
             enabled =
                 state.canEdit,
             onSelected =
@@ -143,71 +146,28 @@ fun TrackScreen(
                 ),
             selected =
                 state.energyLevel,
-            symbols = listOf("◌", "◔", "◑", "◕", "●"),
+            symbols = listOf("▁", "▂", "▃", "▄", "▅"),
+            labels = listOf("Drained", "Low", "Okay", "High", "Full"),
             enabled =
                 state.canEdit,
             onSelected =
                 viewModel::onEnergyChanged
         )
 
-        OutlinedTextField(
-            modifier =
-                Modifier.fillMaxWidth(),
-            value =
-                state.sleepHours,
-            onValueChange =
-                viewModel::
-                    onSleepHoursChanged,
-            enabled =
-                state.canEdit,
-            singleLine =
-                true,
-            label = {
-                Text(
-                    stringResource(
-                        R.string
-                            .track_sleep_hours
-                    )
-                )
-            },
-            placeholder = {
-                Text(
-                    stringResource(
-                        R.string
-                            .track_sleep_hint
-                    )
-                )
-            }
+        DurationSelector(
+            title = stringResource(R.string.track_sleep_hours),
+            description = stringResource(R.string.track_sleep_hint),
+            value = state.sleepHours,
+            enabled = state.canEdit,
+            onValueChange = viewModel::onSleepHoursChanged
         )
 
-        OutlinedTextField(
-            modifier =
-                Modifier.fillMaxWidth(),
-            value =
-                state.focusedWorkHours,
-            onValueChange =
-                viewModel::
-                    onFocusedWorkHoursChanged,
-            enabled =
-                state.canEdit,
-            singleLine =
-                true,
-            label = {
-                Text(
-                    stringResource(
-                        R.string
-                            .track_focus_hours
-                    )
-                )
-            },
-            placeholder = {
-                Text(
-                    stringResource(
-                        R.string
-                            .track_focus_hint
-                    )
-                )
-            }
+        DurationSelector(
+            title = stringResource(R.string.track_focus_hours),
+            description = stringResource(R.string.track_focus_hint),
+            value = state.focusedWorkHours,
+            enabled = state.canEdit,
+            onValueChange = viewModel::onFocusedWorkHoursChanged
         )
 
         OutlinedTextField(
@@ -371,11 +331,23 @@ fun TrackScreen(
                 )
             }
         }
+
+        SectionHeader(
+            title = "Automatically tracked today",
+            description = "Device activity and screen time are collected from connected sources."
+        )
+
         ActivitySection(
             viewModel =
                 activityViewModel
         )
         ScreenTimeSection()
+
+        SectionHeader(
+            title = "Data sources & connections",
+            description = "Manage optional calendar and health connections when you need them."
+        )
+
         CalendarSection()
         GoogleCalendarSection()
         GoogleHealthSection(
@@ -444,11 +416,43 @@ private fun DailyStatusCard(
 }
 
 @Composable
+private fun DurationSelector(
+    title: String,
+    description: String,
+    value: String,
+    enabled: Boolean,
+    onValueChange: (String) -> Unit
+) {
+    val parsed = value.toFloatOrNull()?.coerceIn(0f, 24f)
+    val sliderValue = parsed ?: 0f
+    Column(verticalArrangement = Arrangement.spacedBy(PPISSpacing.xxs)) {
+        Row(verticalAlignment = androidx.compose.ui.Alignment.CenterVertically) {
+            Column(modifier = Modifier.weight(1f)) {
+                Text(title, style = MaterialTheme.typography.titleMedium)
+                Text(description, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            }
+            Text(
+                text = parsed?.let { String.format(Locale.US, "%.1f h", it) } ?: "Not set",
+                style = MaterialTheme.typography.titleLarge
+            )
+        }
+        Slider(
+            value = sliderValue,
+            onValueChange = { selected -> onValueChange(String.format(Locale.US, "%.1f", selected)) },
+            valueRange = 0f..24f,
+            steps = 47,
+            enabled = enabled
+        )
+    }
+}
+
+@Composable
 private fun ScaleSelector(
     title: String,
     description: String,
     selected: Int,
     symbols: List<String>,
+    labels: List<String>,
     enabled: Boolean,
     onSelected:
         (Int) -> Unit
@@ -548,9 +552,9 @@ private fun ScaleSelector(
 
             Text(
                 text =
-                    scaleLabel(
-                        selected
-                    )
+                    labels.getOrElse(selected - 1) { scaleLabel(selected) },
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
             )
         }
     }

@@ -123,10 +123,14 @@ private fun HomeDashboard(
     }
 
     PPISCard {
-        ScoreIndicator(stringResource(R.string.home_sleep_score), analytics.sleepScore)
-        ScoreIndicator(stringResource(R.string.home_activity_score), analytics.activityScore)
-        ScoreIndicator(stringResource(R.string.home_meeting_load_score), analytics.meetingLoadScore)
-        ScoreIndicator(stringResource(R.string.home_distraction_score), analytics.distractionScore)
+        Row(horizontalArrangement = Arrangement.spacedBy(PPISSpacing.md)) {
+            ScoreIndicator(stringResource(R.string.home_sleep_score), analytics.sleepScore, Modifier.weight(1f))
+            ScoreIndicator(stringResource(R.string.home_activity_score), analytics.activityScore, Modifier.weight(1f))
+        }
+        Row(horizontalArrangement = Arrangement.spacedBy(PPISSpacing.md)) {
+            ScoreIndicator(stringResource(R.string.home_meeting_load_score), analytics.meetingLoadScore, Modifier.weight(1f))
+            ScoreIndicator(stringResource(R.string.home_distraction_score), analytics.distractionScore, Modifier.weight(1f))
+        }
     }
 
     if (automaticRefreshIncomplete) {
