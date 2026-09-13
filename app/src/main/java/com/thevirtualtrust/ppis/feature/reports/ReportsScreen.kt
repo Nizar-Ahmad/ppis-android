@@ -27,6 +27,7 @@ import com.thevirtualtrust.ppis.R
 import com.thevirtualtrust.ppis.data.analytics.MonthlyAnalytics
 import com.thevirtualtrust.ppis.data.analytics.WeeklyAnalytics
 import com.thevirtualtrust.ppis.data.analytics.WeeklyInsight
+import com.thevirtualtrust.ppis.ui.components.SectionHeader
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.Locale
@@ -60,35 +61,12 @@ fun ReportsScreen(
             )
     ) {
 
-        Text(
-            text =
-                stringResource(
-                    R.string
-                        .reports_title
-                ),
-            style =
-                MaterialTheme
-                    .typography
-                    .headlineMedium
-        )
-
-        state.timezone
-            ?.let {
-                    timezone ->
-
-                Text(
-                    text =
-                        stringResource(
-                            R.string
-                                .reports_timezone,
-                            timezone
-                        ),
-                    style =
-                        MaterialTheme
-                            .typography
-                            .bodySmall
-                )
+        SectionHeader(
+            title = stringResource(R.string.reports_title),
+            description = state.timezone?.let { timezone ->
+                stringResource(R.string.reports_timezone, timezone)
             }
+        )
 
         if (
             state.initializationError !=
@@ -165,6 +143,7 @@ private fun ReportTabs(
 ) {
 
     Row(
+        modifier = Modifier.fillMaxWidth(),
         horizontalArrangement =
             Arrangement.spacedBy(
                 10.dp
@@ -177,6 +156,7 @@ private fun ReportTabs(
         ) {
 
             Button(
+                modifier = Modifier.weight(1f),
                 onClick =
                     onWeekly
             ) {
@@ -192,6 +172,7 @@ private fun ReportTabs(
         } else {
 
             OutlinedButton(
+                modifier = Modifier.weight(1f),
                 onClick =
                     onWeekly
             ) {
@@ -211,6 +192,7 @@ private fun ReportTabs(
         ) {
 
             Button(
+                modifier = Modifier.weight(1f),
                 onClick =
                     onMonthly
             ) {
@@ -226,6 +208,7 @@ private fun ReportTabs(
         } else {
 
             OutlinedButton(
+                modifier = Modifier.weight(1f),
                 onClick =
                     onMonthly
             ) {

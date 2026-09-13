@@ -26,6 +26,7 @@ import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.thevirtualtrust.ppis.R
 import com.thevirtualtrust.ppis.data.auth.session.AuthSessionInfo
+import com.thevirtualtrust.ppis.ui.components.SectionHeader
 
 @Composable
 fun ProfileScreen(
@@ -69,16 +70,9 @@ fun ProfileScreen(
                     )
             ) {
 
-                Text(
-                    stringResource(
-                        R.string.profile_title
-                    )
-                )
-
-                Text(
-                    stringResource(
-                        R.string.profile_description
-                    )
+                SectionHeader(
+                    title = stringResource(R.string.profile_title),
+                    description = stringResource(R.string.profile_description)
                 )
             }
         }
@@ -97,9 +91,8 @@ fun ProfileScreen(
         item {
 
             Text(
-                stringResource(
-                    R.string.profile_account_title
-                )
+                stringResource(R.string.profile_account_title),
+                style = androidx.compose.material3.MaterialTheme.typography.titleLarge
             )
         }
 
@@ -203,9 +196,8 @@ fun ProfileScreen(
         item {
 
             Text(
-                stringResource(
-                    R.string.profile_personal_title
-                )
+                stringResource(R.string.profile_personal_title),
+                style = androidx.compose.material3.MaterialTheme.typography.titleLarge
             )
         }
 
