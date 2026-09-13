@@ -26,6 +26,7 @@ import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.thevirtualtrust.ppis.R
 import com.thevirtualtrust.ppis.data.activity.ActivitySource
+import com.thevirtualtrust.ppis.ui.components.IntegrationHeader
 import com.thevirtualtrust.ppis.ui.components.LoadingState
 import com.thevirtualtrust.ppis.ui.components.SectionHeader
 import com.thevirtualtrust.ppis.ui.components.StatusChip
@@ -362,25 +363,10 @@ private fun HealthConnectCard(
                 )
         ) {
 
-            Text(
-                text =
-                    stringResource(
-                        R.string
-                            .activity_health_connect_title
-                    ),
-
-                style =
-                    MaterialTheme
-                        .typography
-                        .titleMedium
-            )
-
-            Text(
-                text =
-                    stringResource(
-                        R.string
-                            .activity_health_connect_description
-                    )
+            IntegrationHeader(
+                title = stringResource(R.string.activity_health_connect_title),
+                description = stringResource(R.string.activity_health_connect_description),
+                iconRes = R.drawable.ic_integration_health_connect
             )
 
 

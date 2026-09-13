@@ -82,6 +82,45 @@ fun SectionHeader(title: String, description: String? = null) {
 }
 
 @Composable
+fun IntegrationHeader(
+    title: String,
+    description: String,
+    iconRes: Int,
+    modifier: Modifier = Modifier
+) {
+    Row(
+        modifier = modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.spacedBy(PPISSpacing.sm),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Card(
+            modifier = Modifier.size(40.dp),
+            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant),
+            elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
+            shape = MaterialTheme.shapes.medium
+        ) {
+            Image(
+                painter = painterResource(iconRes),
+                contentDescription = title,
+                modifier = Modifier.fillMaxSize().padding(PPISSpacing.xs),
+                contentScale = ContentScale.Fit
+            )
+        }
+        Column(
+            modifier = Modifier.weight(1f),
+            verticalArrangement = Arrangement.spacedBy(PPISSpacing.xxs)
+        ) {
+            Text(text = title, style = MaterialTheme.typography.titleLarge)
+            Text(
+                text = description,
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+        }
+    }
+}
+
+@Composable
 fun PPISPageHeader(title: String, description: String? = null) {
     Row(
         modifier = Modifier.fillMaxWidth(),

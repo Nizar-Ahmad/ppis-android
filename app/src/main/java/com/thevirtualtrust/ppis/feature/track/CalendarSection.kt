@@ -22,7 +22,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.thevirtualtrust.ppis.R
-import com.thevirtualtrust.ppis.ui.components.SectionHeader
+import com.thevirtualtrust.ppis.ui.components.IntegrationHeader
 import com.thevirtualtrust.ppis.ui.components.StatusChip
 
 @Composable
@@ -55,9 +55,10 @@ fun CalendarSection(
             )
     )
 
-    SectionHeader(
+    IntegrationHeader(
         title = stringResource(R.string.calendar_section_title),
-        description = stringResource(R.string.calendar_section_description)
+        description = stringResource(R.string.calendar_section_description),
+        iconRes = R.drawable.ic_integration_device_calendar
     )
     StatusChip(
         label = when (state.status) {

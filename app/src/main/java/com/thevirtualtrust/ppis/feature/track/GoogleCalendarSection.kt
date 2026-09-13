@@ -23,7 +23,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.thevirtualtrust.ppis.R
-import com.thevirtualtrust.ppis.ui.components.SectionHeader
+import com.thevirtualtrust.ppis.ui.components.IntegrationHeader
 import com.thevirtualtrust.ppis.ui.components.StatusChip
 
 @Composable
@@ -94,9 +94,10 @@ fun GoogleCalendarSection(
             )
     )
 
-    SectionHeader(
+    IntegrationHeader(
         title = stringResource(R.string.google_calendar_title),
-        description = stringResource(R.string.google_calendar_description)
+        description = stringResource(R.string.google_calendar_description),
+        iconRes = R.drawable.google_calendar
     )
     StatusChip(
         label = if (state.status == GoogleCalendarUiStatus.CONNECTED) "Connected" else "Not connected",

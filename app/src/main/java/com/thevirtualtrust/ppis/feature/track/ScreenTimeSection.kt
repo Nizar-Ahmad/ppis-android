@@ -30,6 +30,7 @@ import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.thevirtualtrust.ppis.R
 import com.thevirtualtrust.ppis.ui.components.LoadingState
+import com.thevirtualtrust.ppis.ui.components.IntegrationHeader
 import com.thevirtualtrust.ppis.ui.components.MetricRow
 import com.thevirtualtrust.ppis.ui.components.SectionHeader
 import com.thevirtualtrust.ppis.ui.components.StatusChip
@@ -371,24 +372,10 @@ private fun DeviceUsageCard(
                 )
         ) {
 
-            Text(
-                text =
-                    stringResource(
-                        R.string
-                            .screen_time_device_title
-                    ),
-
-                style =
-                    MaterialTheme
-                        .typography
-                        .titleMedium
-            )
-
-            Text(
-                stringResource(
-                    R.string
-                        .screen_time_device_description
-                )
+            IntegrationHeader(
+                title = stringResource(R.string.screen_time_device_title),
+                description = stringResource(R.string.screen_time_device_description),
+                iconRes = R.drawable.ic_integration_device_usage
             )
 
             when (
