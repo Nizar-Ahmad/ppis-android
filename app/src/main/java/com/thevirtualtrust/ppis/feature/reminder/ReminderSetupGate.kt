@@ -12,9 +12,13 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.foundation.background
 import androidx.compose.material3.Button
-import androidx.compose.material3.Card
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
@@ -56,7 +60,8 @@ fun ReminderSetupGate(
             Box(
                 modifier =
                     modifier
-                        .fillMaxSize(),
+                        .fillMaxSize()
+                        .background(MaterialTheme.colorScheme.background),
                 contentAlignment =
                     Alignment.Center
             ) {
@@ -137,12 +142,17 @@ private fun ReminderSetupScreen(
         modifier =
             modifier
                 .fillMaxSize()
+                .background(MaterialTheme.colorScheme.background)
+                .statusBarsPadding()
+                .navigationBarsPadding()
+                .verticalScroll(rememberScrollState())
                 .padding(
-                    PPISSpacing.lg
+                    horizontal = PPISSpacing.lg,
+                    vertical = PPISSpacing.xl
                 ),
         verticalArrangement =
             Arrangement.spacedBy(
-                    PPISSpacing.lg
+                    PPISSpacing.md
             )
     ) {
 
@@ -170,15 +180,20 @@ private fun ReminderSetupScreen(
                         stringResource(
                             R.string
                                 .reminder_telemetry_independent_description
-                        )
+                        ),
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
         }
 
         PPISCard(containerColor = MaterialTheme.colorScheme.primaryContainer) {
-            Text(stringResource(R.string.reminder_time_label), style = MaterialTheme.typography.titleMedium)
+            Text(
+                text = "Daily reminder",
+                style = MaterialTheme.typography.titleMedium
+            )
             OutlinedButton(
                 modifier = Modifier.fillMaxWidth(),
                 enabled = !state.isSaving,
+                shape = MaterialTheme.shapes.medium,
                 onClick = {
                     TimePickerDialog(
                         context,
@@ -196,18 +211,37 @@ private fun ReminderSetupScreen(
                     set(java.util.Calendar.MINUTE, minute)
                 }.time), style = MaterialTheme.typography.headlineSmall)
             }
-            Text("Tap the time to choose an hour and minute.", style = MaterialTheme.typography.bodyMedium)
+            Text(
+                text = "Tap to choose an hour and minute.",
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.8f)
+            )
+        }
+
+        if (!notificationsGranted) {
+            PPISCard(containerColor = MaterialTheme.colorScheme.surfaceVariant) {
+                Text(
+                    text = "Allow notifications to receive your reminder.",
+                    style = MaterialTheme.typography.titleSmall
+                )
+                Text(
+                    text = "Android will ask for permission after you continue.",
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            }
         }
 
         state.error?.let {
                 error ->
 
-            Text(
-                text =
-                    stringResource(
-                        when (
-                            error
-                        ) {
+            PPISCard(containerColor = MaterialTheme.colorScheme.errorContainer) {
+                Text(
+                    text =
+                        stringResource(
+                            when (
+                                error
+                            ) {
 
                             ReminderSetupError
                                 .INVALID_TIME ->
@@ -223,9 +257,11 @@ private fun ReminderSetupScreen(
                                 .UNKNOWN ->
                                 R.string
                                     .reminder_error_unknown
-                        }
-                    )
-            )
+                            }
+                        ),
+                    color = MaterialTheme.colorScheme.onErrorContainer
+                )
+            }
         }
 
         Button(

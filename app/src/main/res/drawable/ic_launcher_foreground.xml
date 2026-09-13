@@ -3,5 +3,5 @@
     android:inset="18dp">
     <bitmap
         android:gravity="fill"
-        android:src="@drawable/ppis_light" />
+        android:src="@drawable/ppis_launcher" />
 </inset>
