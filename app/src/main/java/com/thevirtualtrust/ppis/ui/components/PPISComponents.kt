@@ -128,7 +128,11 @@ fun PPISPageHeader(title: String, description: String? = null) {
         horizontalArrangement = Arrangement.spacedBy(PPISSpacing.md)
     ) {
         Column(modifier = Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(PPISSpacing.xxs)) {
-            Text(text = title, style = MaterialTheme.typography.headlineMedium)
+            Text(
+                text = title,
+                style = MaterialTheme.typography.headlineMedium,
+                color = MaterialTheme.colorScheme.onBackground
+            )
             description?.let {
                 Text(
                     text = it,
