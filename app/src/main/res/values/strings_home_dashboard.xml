@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="home_title">
+        Today
+    </string>
+
+    <string name="home_profile_timezone">
+        Profile timezone: %1$s
+    </string>
+
+    <string name="home_loading">
+        Updating today’s dashboard…
+    </string>
+
+    <string name="home_loading_description">
+        PPIS is refreshing available automatic signals before requesting the canonical daily analytics.
+    </string>
+
+    <string name="home_refreshing">
+        Refreshing today’s automatic data…
+    </string>
+
+    <string name="home_refresh">
+        Refresh today
+    </string>
+
+    <string name="home_retry">
+        Retry
+    </string>
+
+    <string name="home_productivity">
+        Productivity
+    </string>
+
+    <string name="home_productivity_description">
+        Canonical productivity score calculated by the PPIS backend from today’s available signals.
+    </string>
+
+    <string name="home_stress">
+        Stress index
+    </string>
+
+    <string name="home_stress_description">
+        Canonical stress index calculated by the PPIS backend from available stress-related signals.
+    </string>
+
+    <string name="home_stress_not_enough_data">
+        Not enough stress-related data
+    </string>
+
+    <string name="home_productivity_coverage">
+        Productivity data coverage
+    </string>
+
+    <string name="home_stress_coverage">
+        Stress data coverage
+    </string>
+
+    <string name="home_coverage_full">
+        Full data coverage
+    </string>
+
+    <string name="home_coverage_high">
+        High coverage
+    </string>
+
+    <string name="home_coverage_partial">
+        Partial coverage
+    </string>
+
+    <string name="home_coverage_limited">
+        Limited data
+    </string>
+
+    <string name="home_coverage_none">
+        No data yet
+    </string>
+
+    <string name="home_components_title">
+        Today’s components
+    </string>
+
+    <string name="home_components_description">
+        These values are backend-calculated components. Data coverage indicates how complete today’s available input signals are.
+    </string>
+
+    <string name="home_sleep_score">
+        Sleep score
+    </string>
+
+    <string name="home_meeting_load_score">
+        Meeting load score
+    </string>
+
+    <string name="home_distraction_score">
+        Distraction score
+    </string>
+
+    <string name="home_activity_score">
+        Activity score
+    </string>
+
+    <string name="home_no_data_title">
+        No data yet
+    </string>
+
+    <string name="home_no_data_description">
+        PPIS does not yet have enough analyzable information for today. Automatic sources can continue collecting data without a subjective check-in.
+    </string>
+
+    <string name="home_source_warning">
+        Some automatic sources could not refresh. The dashboard only reflects data currently available to the backend.
+    </string>
+
+    <string name="home_error_title">
+        Dashboard unavailable
+    </string>
+
+    <string name="home_error_network">
+        PPIS cannot reach the server. Check your connection and try again.
+    </string>
+
+    <string name="home_error_timeout">
+        The server took too long to respond.
+    </string>
+
+    <string name="home_error_unauthorized">
+        Your session is no longer authorized.
+    </string>
+
+    <string name="home_error_forbidden">
+        Access to this dashboard was denied.
+    </string>
+
+    <string name="home_error_rate_limited">
+        Too many requests were made. Try again shortly.
+    </string>
+
+    <string name="home_error_server">
+        The PPIS server could not provide today’s analytics.
+    </string>
+
+    <string name="home_error_timezone">
+        Your profile timezone is invalid. Update it from Profile before using daily analytics.
+    </string>
+
+    <string name="home_error_unknown">
+        Today’s dashboard could not be loaded.
+    </string>
+
+</resources>

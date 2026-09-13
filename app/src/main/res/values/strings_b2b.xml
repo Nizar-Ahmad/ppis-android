@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="profile_daily_report">
+        Daily report email
+    </string>
+
+    <string name="profile_daily_report_description">
+        Receive the daily productivity and well-being report by email when enough data is available.
+    </string>
+
+    <string name="activity_recognition_permission_description">
+        Allow physical activity access so PPIS can automatically collect device steps when Health Connect does not provide them.
+    </string>
+
+    <string name="activity_enable_step_tracking">
+        Enable automatic step tracking
+    </string>
+
+</resources>

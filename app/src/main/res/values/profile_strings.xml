@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="profile_title">Profile</string>
+    <string name="profile_description">Account, preferences, security and active sessions.</string>
+
+    <!-- Account summary -->
+    <string name="profile_account_title">Account</string>
+    <string name="profile_email">Email</string>
+    <string name="profile_role">Role</string>
+    <string name="profile_google">Google account</string>
+    <string name="profile_password">Password</string>
+    <string name="profile_connected">Connected</string>
+    <string name="profile_not_connected">Not connected</string>
+    <string name="profile_password_set">Password configured</string>
+    <string name="profile_password_not_set">No password configured</string>
+
+    <!-- Editable profile -->
+    <string name="profile_personal_title">Personal information</string>
+    <string name="profile_full_name">Full name</string>
+    <string name="profile_birth_date">Birth date</string>
+    <string name="profile_birth_date_hint">YYYY-MM-DD</string>
+    <string name="profile_country">Country</string>
+    <string name="profile_occupation">Occupation</string>
+    <string name="profile_timezone">Timezone</string>
+    <string name="profile_language">Preferred language</string>
+
+    <string name="profile_login_otp">Login OTP</string>
+    <string name="profile_login_otp_description">Require email verification codes when signing in.</string>
+    <string name="profile_login_otp_password_required">A password is required before login OTP can be enabled.</string>
+
+    <string name="profile_save_changes">Save profile</string>
+    <string name="profile_saving">Saving…</string>
+    <string name="profile_discard_changes">Discard changes</string>
+    <string name="profile_profile_saved">Profile saved.</string>
+
+    <string name="profile_full_name_required">Full name is required.</string>
+    <string name="profile_timezone_required">Timezone is required.</string>
+    <string name="profile_language_required">Preferred language is required.</string>
+    <string name="profile_invalid_input">Check the profile information you entered.</string>
+
+    <!-- Notifications -->
+    <string name="profile_notifications_title">Email notifications</string>
+    <string name="profile_notifications_description">Choose which account and report emails PPIS can send you.</string>
+
+    <string name="profile_weekly_report">Weekly report</string>
+    <string name="profile_weekly_report_description">Receive your weekly productivity report by email.</string>
+
+    <string name="profile_monthly_report">Monthly report</string>
+    <string name="profile_monthly_report_description">Receive your monthly productivity report by email.</string>
+
+    <string name="profile_new_login">New login alert</string>
+    <string name="profile_new_login_description">Receive an email when a new login is detected.</string>
+
+    <string name="profile_save_notifications">Save notification preferences</string>
+    <string name="profile_saving_notifications">Saving preferences…</string>
+    <string name="profile_discard_notifications">Discard notification changes</string>
+    <string name="profile_notifications_saved">Notification preferences saved.</string>
+
+    <!-- Sessions -->
+    <string name="profile_sessions_title">Sessions</string>
+    <string name="profile_sessions_description">Devices and sessions that have signed in to your PPIS account.</string>
+
+    <string name="profile_current_device">This device</string>
+    <string name="profile_active_session">Active</string>
+    <string name="profile_revoked_session">Revoked</string>
+    <string name="profile_unknown_device">Unknown device</string>
+
+    <string name="profile_client">Client: %1$s</string>
+    <string name="profile_app_version">App version: %1$s</string>
+    <string name="profile_last_seen">Last seen: %1$s</string>
+    <string name="profile_created">Signed in: %1$s</string>
+
+    <string name="profile_refresh">Refresh sessions</string>
+    <string name="profile_revoke_session">Revoke session</string>
+    <string name="profile_revoking">Revoking…</string>
+
+    <string name="profile_revoke_others">Revoke all other sessions</string>
+    <string name="profile_revoke_others_running">Revoking other sessions…</string>
+
+    <string name="profile_session_revoked">Session revoked.</string>
+    <string name="profile_other_sessions_revoked">Other sessions revoked.</string>
+    <string name="profile_no_sessions">No sessions were returned.</string>
+
+    <!-- Sign out -->
+    <string name="profile_security_title">Sign out</string>
+    <string name="profile_logout">Log out</string>
+    <string name="profile_logging_out">Logging out…</string>
+    <string name="profile_logout_all">Log out all devices</string>
+    <string name="profile_logging_out_all">Logging out all devices…</string>
+    <string name="profile_logout_all_warning">This revokes every PPIS session for your account, including this device.</string>
+
+    <!-- Errors -->
+    <string name="profile_network_error">Unable to reach PPIS. Check your internet connection.</string>
+    <string name="profile_timeout_error">PPIS took too long to respond. Try again.</string>
+    <string name="profile_unauthorized_error">This session is no longer authorized.</string>
+    <string name="profile_forbidden_error">You do not have permission to perform this action.</string>
+    <string name="profile_not_found_error">That resource no longer exists.</string>
+    <string name="profile_server_error">PPIS is temporarily unavailable. Try again.</string>
+    <string name="profile_unknown_error">The action could not be completed.</string>
+
+    <string name="profile_dismiss">Dismiss</string>
+
+</resources>

@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="track_title">Track</string>
+    <string name="track_description">Daily check-in, activity, screen time and calendar.</string>
+
+    <string name="track_daily_title">Daily check-in</string>
+    <string name="track_daily_description">Record how today is going. You can update today\'s entry later.</string>
+
+    <string name="track_today">Today</string>
+    <string name="track_entry_new">New entry</string>
+    <string name="track_entry_existing">Saved entry</string>
+
+    <string name="track_mood">Mood</string>
+    <string name="track_mood_description">How do you feel today?</string>
+
+    <string name="track_energy">Energy</string>
+    <string name="track_energy_description">How energetic do you feel?</string>
+
+    <string name="track_scale_very_low">Very low</string>
+    <string name="track_scale_low">Low</string>
+    <string name="track_scale_medium">Medium</string>
+    <string name="track_scale_high">High</string>
+    <string name="track_scale_very_high">Very high</string>
+
+    <string name="track_sleep_hours">Sleep hours</string>
+    <string name="track_sleep_hint">Example: 7.5</string>
+
+    <string name="track_focus_hours">Focused work hours</string>
+    <string name="track_focus_hint">Example: 5.5</string>
+
+    <string name="track_notes">Notes</string>
+    <string name="track_notes_hint">Anything useful about your day…</string>
+    <string name="track_notes_counter">%1$d / 1000</string>
+
+    <string name="track_save">Save check-in</string>
+    <string name="track_update">Update check-in</string>
+    <string name="track_saving">Saving…</string>
+    <string name="track_retry">Retry</string>
+
+    <string name="track_saved">Daily check-in saved.</string>
+    <string name="track_updated">Daily check-in updated.</string>
+    <string name="track_conflict_reloaded">A check-in already existed for today. The saved entry was loaded.</string>
+
+    <string name="track_sleep_required">Enter your sleep hours.</string>
+    <string name="track_sleep_invalid">Sleep hours must be a number between 0 and 24.</string>
+    <string name="track_focus_required">Enter your focused work hours.</string>
+    <string name="track_focus_invalid">Focused work hours must be a number between 0 and 24.</string>
+    <string name="track_notes_too_long">Notes cannot exceed 1000 characters.</string>
+
+    <string name="track_network_error">Unable to reach PPIS. Your entered values were kept.</string>
+    <string name="track_timeout_error">PPIS took too long to respond. Your entered values were kept.</string>
+    <string name="track_validation_error">Check the values you entered.</string>
+    <string name="track_server_error">PPIS is temporarily unavailable. Your entered values were kept.</string>
+    <string name="track_unknown_error">The check-in could not be completed.</string>
+
+    <string name="track_loading">Loading today\'s check-in…</string>
+
+
+    <!-- Activity -->
+    <string name="activity_section_title">Activity</string>
+    <string name="activity_section_description">Track today\'s movement. PPIS uses Health Connect when available, with manual entry as a fallback.</string>
+
+    <string name="activity_today">Today</string>
+    <string name="activity_new_entry">No activity saved yet</string>
+    <string name="activity_saved_entry">Saved activity</string>
+
+    <string name="activity_steps">Steps</string>
+    <string name="activity_steps_hint">Example: 8000</string>
+
+    <string name="activity_minutes">Activity minutes</string>
+    <string name="activity_minutes_hint">Example: 45</string>
+
+    <string name="activity_source">Source: %1$s</string>
+    <string name="activity_source_manual">Manual</string>
+    <string name="activity_source_health_connect">Health Connect</string>
+
+    <string name="activity_health_connect_manual_warning">This entry came from Health Connect. Saving manual changes will change its source to Manual.</string>
+
+    <string name="activity_save">Save activity</string>
+    <string name="activity_update">Update activity</string>
+    <string name="activity_saving">Saving…</string>
+    <string name="activity_retry">Retry activity load</string>
+
+    <string name="activity_created">Activity saved.</string>
+    <string name="activity_updated">Activity updated.</string>
+    <string name="activity_conflict_reloaded">Activity already existed for today. The saved entry was loaded.</string>
+
+    <string name="activity_steps_required">Enter your step count.</string>
+    <string name="activity_steps_invalid">Steps must be zero or greater.</string>
+
+    <string name="activity_minutes_required">Enter your activity minutes.</string>
+    <string name="activity_minutes_invalid">Activity minutes must be between 0 and 1440.</string>
+
+    <string name="activity_validation_error">Check the activity values you entered.</string>
+    <string name="activity_network_error">Unable to reach PPIS. Your activity values were kept.</string>
+    <string name="activity_timeout_error">PPIS took too long to respond. Your activity values were kept.</string>
+    <string name="activity_server_error">PPIS is temporarily unavailable. Your activity values were kept.</string>
+    <string name="activity_unknown_error">The activity entry could not be completed.</string>
+
+    <string name="activity_loading">Loading today\'s activity…</string>
+
+
+    <!-- Health Connect -->
+    <string name="activity_health_connect_title">Health Connect</string>
+    <string name="activity_health_connect_description">PPIS can use device health data as the default instead of asking you to enter values manually.</string>
+
+    <string name="activity_health_connect_checking">Checking Health Connect…</string>
+
+    <string name="activity_health_connect_connect">Connect Health Connect</string>
+    <string name="activity_health_connect_permission_description">Allow PPIS to read steps and activity duration from Health Connect.</string>
+
+    <string name="activity_health_connect_ready">Health Connect is ready.</string>
+    <string name="activity_health_connect_no_data">No activity data is available in Health Connect for today.</string>
+
+    <string name="activity_health_connect_device_steps">Device steps: %1$d</string>
+    <string name="activity_health_connect_device_minutes">Device activity minutes: %1$d</string>
+
+    <string name="activity_health_connect_use_values">Use device values</string>
+    <string name="activity_health_connect_refresh">Refresh device values</string>
+
+    <string name="activity_health_connect_loaded">Today\'s available device values were loaded automatically.</string>
+    <string name="activity_health_connect_applied">Device values applied.</string>
+    <string name="activity_health_connect_permission_denied">Health Connect permission was not granted. Manual entry remains available.</string>
+
+    <string name="activity_health_connect_unavailable">Health Connect is not available on this device. Manual entry remains available.</string>
+
+    <string name="activity_health_connect_update_required">Health Connect needs to be installed or updated before PPIS can read device activity.</string>
+
+    <string name="activity_health_connect_read_failed">PPIS could not read Health Connect. Manual entry remains available.</string>
+
+
+    <!-- Screen Time -->
+    <string name="screen_time_section_title">Screen time</string>
+    <string name="screen_time_section_description">PPIS uses Android usage data as the default when available. Manual entry remains available as a fallback.</string>
+
+    <string name="screen_time_today">Today</string>
+    <string name="screen_time_new_entry">No screen time saved yet</string>
+    <string name="screen_time_saved_entry">Saved screen time</string>
+
+    <string name="screen_time_total_minutes">Total screen time (minutes)</string>
+    <string name="screen_time_total_hint">Example: 240</string>
+
+    <string name="screen_time_night_minutes">Night screen time (minutes)</string>
+    <string name="screen_time_night_hint">Example: 30</string>
+
+    <string name="screen_time_device_title">Device usage</string>
+    <string name="screen_time_device_description">Allow PPIS to read Android app usage so screen-time values can be filled automatically.</string>
+
+    <string name="screen_time_usage_access_required">Usage access is required to read screen time from this device.</string>
+    <string name="screen_time_enable_usage_access">Enable usage access</string>
+
+    <string name="screen_time_device_ready">Device usage access is enabled.</string>
+    <string name="screen_time_device_total">Device total: %1$d min</string>
+    <string name="screen_time_device_night">Device night usage: %1$d min</string>
+    <string name="screen_time_device_no_data">No device screen-time data is available for today.</string>
+
+    <string name="screen_time_use_device_values">Use device values</string>
+    <string name="screen_time_refresh_device_values">Refresh device values</string>
+    <string name="screen_time_device_values_loaded">Available device screen-time values were loaded automatically.</string>
+    <string name="screen_time_device_values_applied">Device screen-time values applied.</string>
+
+    <string name="screen_time_device_read_failed">PPIS could not read Android usage data. Manual entry remains available.</string>
+    <string name="screen_time_device_unavailable">Android usage statistics are unavailable on this device.</string>
+
+    <string name="screen_time_save">Save screen time</string>
+    <string name="screen_time_update">Update screen time</string>
+
+    <string name="screen_time_created">Screen time saved.</string>
+    <string name="screen_time_updated">Screen time updated.</string>
+    <string name="screen_time_conflict_reloaded">Screen time already existed for today. The saved entry was loaded.</string>
+
+    <string name="screen_time_total_required">Enter total screen-time minutes.</string>
+    <string name="screen_time_total_invalid">Total screen time must be between 0 and 1440 minutes.</string>
+
+    <string name="screen_time_night_required">Enter night screen-time minutes.</string>
+    <string name="screen_time_night_invalid">Night screen time must be between 0 and 1440 minutes.</string>
+    <string name="screen_time_night_over_total">Night screen time cannot be greater than total screen time.</string>
+
+    <string name="screen_time_validation_error">Check the screen-time values you entered.</string>
+    <string name="screen_time_network_error">Unable to reach PPIS. Your screen-time values were kept.</string>
+    <string name="screen_time_timeout_error">PPIS took too long to respond. Your screen-time values were kept.</string>
+    <string name="screen_time_server_error">PPIS is temporarily unavailable. Your screen-time values were kept.</string>
+    <string name="screen_time_unknown_error">The screen-time entry could not be completed.</string>
+
+    <string name="screen_time_loading">Loading today\'s screen time…</string>
+    <string name="screen_time_retry">Retry screen-time load</string>
+
+</resources>

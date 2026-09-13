@@ -1,0 +1,16 @@
+# PPIS production logging policy.
+#
+# Development builds retain Android logcat diagnostics.
+# Optimized release builds treat android.util.Log calls
+# as having no observable side effects so R8 may remove them.
+#
+# Never use this rule for application methods.
+
+-assumenosideeffects class android.util.Log {
+    public static int v(...);
+    public static int d(...);
+    public static int i(...);
+    public static int w(...);
+    public static int e(...);
+    public static int wtf(...);
+}

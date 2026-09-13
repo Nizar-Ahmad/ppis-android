@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="calendar_section_title">
+        Calendar
+    </string>
+
+    <string name="calendar_section_description">
+        PPIS can automatically read timed events from your Android calendars and use them to calculate meeting load.
+    </string>
+
+    <string name="calendar_checking">
+        Checking local calendar…
+    </string>
+
+    <string name="calendar_permission_description">
+        Allow calendar access to automatically include timed local and device calendar events. All-day events are ignored.
+    </string>
+
+    <string name="calendar_enable_access">
+        Enable calendar access
+    </string>
+
+    <string name="calendar_ready">
+        Automatic local calendar sync is active.
+    </string>
+
+    <string name="calendar_events_read">
+        Events found in the rolling window: %1$d
+    </string>
+
+    <string name="calendar_sync_changes">
+        Last sync — created: %1$d, updated: %2$d, removed: %3$d
+    </string>
+
+    <string name="calendar_duplicates_skipped">
+        Duplicate events already represented by another calendar source: %1$d
+    </string>
+
+    <string name="calendar_sync_now">
+        Sync local calendar now
+    </string>
+
+    <string name="calendar_read_failed">
+        Local calendar could not be synchronized.
+    </string>
+
+    <string name="calendar_retry">
+        Retry calendar sync
+    </string>
+
+</resources>

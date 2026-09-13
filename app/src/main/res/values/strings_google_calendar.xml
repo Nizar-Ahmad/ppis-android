@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="google_calendar_title">
+        Google Calendar
+    </string>
+
+    <string name="google_calendar_description">
+        Connect Google Calendar to let the PPIS server securely synchronize timed meetings. All-day events are ignored.
+    </string>
+
+    <string name="google_calendar_checking">
+        Checking Google Calendar connection…
+    </string>
+
+    <string name="google_calendar_not_connected">
+        Google Calendar is not connected.
+    </string>
+
+    <string name="google_calendar_connect">
+        Connect Google Calendar
+    </string>
+
+    <string name="google_calendar_waiting_oauth">
+        Waiting for Google authorization. Complete the consent flow in the browser.
+    </string>
+
+    <string name="google_calendar_check_connection">
+        Check connection
+    </string>
+
+    <string name="google_calendar_connected">
+        Google Calendar is connected. Scheduled server synchronization will keep calendar data refreshed.
+    </string>
+
+    <string name="google_calendar_token_expiry">
+        Current access token expiry: %1$s
+    </string>
+
+    <string name="google_calendar_sync_now">
+        Sync Google Calendar now
+    </string>
+
+    <string name="google_calendar_sync_summary">
+        Calendars: %1$d — created: %2$d, updated: %3$d, skipped: %4$d
+    </string>
+
+    <string name="google_calendar_disconnect">
+        Disconnect Google Calendar
+    </string>
+
+    <string name="google_calendar_disconnect_title">
+        Disconnect Google Calendar?
+    </string>
+
+    <string name="google_calendar_disconnect_description">
+        This stops future Google Calendar synchronization. Previously imported PPIS calendar records are not automatically erased.
+    </string>
+
+    <string name="google_calendar_cancel">
+        Cancel
+    </string>
+
+    <string name="google_calendar_error">
+        Google Calendar could not be reached or synchronized.
+    </string>
+
+    <string name="google_calendar_retry">
+        Retry
+    </string>
+
+</resources>

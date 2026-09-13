@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">PPIS</string>
+
+    <string name="activity_source_google_health">Google Health</string>
+
+    <string name="daily_report_channel_name">Daily reports</string>
+    <string name="daily_report_channel_description">PPIS daily productivity report notifications</string>
+    <string name="daily_report_notification_title">Your PPIS daily report is ready</string>
+    <string name="daily_report_notification_text">Report for %1$s • Productivity %2$d/100 • Stress %3$s</string>
+    <string name="daily_report_stress_unavailable">not enough data</string>
+
+
+    <string name="screen_time_top_apps_title">Top used apps</string>
+    <string name="screen_time_top_app_item">%1$d. %2$s — %3$d min</string>
+
+</resources>

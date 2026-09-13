@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="auth_welcome_title">
+        Welcome to PPIS
+    </string>
+
+    <string name="auth_welcome_description">
+        Understand your productivity patterns and build healthier daily routines.
+    </string>
+
+    <string name="auth_sign_in">
+        Sign in
+    </string>
+
+    <string name="auth_create_account">
+        Create account
+    </string>
+
+    <string name="auth_login_title">
+        Sign in
+    </string>
+
+    <string name="auth_login_description">
+        Sign in to your PPIS account.
+    </string>
+
+    <string name="auth_email">
+        Email
+    </string>
+
+    <string name="auth_password">
+        Password
+    </string>
+
+    <string name="auth_show_password">
+        Show
+    </string>
+
+    <string name="auth_hide_password">
+        Hide
+    </string>
+
+    <string name="auth_signing_in">
+        Signing in…
+    </string>
+
+    <string name="auth_email_required">
+        Enter your email address.
+    </string>
+
+    <string name="auth_password_required">
+        Enter your password.
+    </string>
+
+    <string name="auth_invalid_credentials">
+        Invalid email or password.
+    </string>
+
+    <string name="auth_invalid_input">
+        Check the information you entered.
+    </string>
+
+    <string name="auth_network_unavailable">
+        Unable to reach PPIS. Check your internet connection.
+    </string>
+
+    <string name="auth_request_timeout">
+        PPIS took too long to respond. Try again.
+    </string>
+
+    <string name="auth_rate_limited">
+        Too many attempts. Try again later.
+    </string>
+
+    <string name="auth_server_error">
+        PPIS is temporarily unavailable. Try again.
+    </string>
+
+    <string name="auth_unknown_error">
+        Sign in could not be completed. Try again.
+    </string>
+
+    <string name="auth_signup_title">
+        Create your account
+    </string>
+
+    <string name="auth_signup_description">
+        Create a PPIS user account.
+    </string>
+
+    <string name="auth_forgot_password">
+        Forgot password?
+    </string>
+
+    <string name="auth_forgot_title">
+        Reset password
+    </string>
+
+    <string name="auth_forgot_description">
+        Password reset verification will be connected to the PPIS OTP service in the next authentication checkpoint.
+    </string>
+
+    <string name="auth_otp_title">
+        Verification
+    </string>
+
+    <string name="auth_otp_login">
+        Verify your sign-in
+    </string>
+
+    <string name="auth_otp_signup">
+        Verify your new account
+    </string>
+
+    <string name="auth_otp_reset">
+        Verify your password reset
+    </string>
+
+    <string name="auth_otp_expires">
+        This verification challenge expires in %1$d seconds.
+    </string>
+
+    <string name="auth_otp_pending">
+        Code verification will be connected in the next authentication checkpoint.
+    </string>
+
+    <string name="auth_back">
+        Back
+    </string>
+
+    <string name="auth_signup_backend_pending">
+        Signup form and verification flow will be connected next.
+    </string>
+
+
+    <string name="auth_otp_code">
+        Verification code
+    </string>
+
+    <string name="auth_otp_verify">
+        Verify
+    </string>
+
+    <string name="auth_otp_verifying">
+        Verifying…
+    </string>
+
+    <string name="auth_otp_resend">
+        Resend code
+    </string>
+
+    <string name="auth_otp_resending">
+        Sending…
+    </string>
+
+    <string name="auth_otp_resent">
+        A new verification code was sent.
+    </string>
+
+    <string name="auth_otp_code_required">
+        Enter the verification code.
+    </string>
+
+    <string name="auth_otp_six_digits">
+        Enter the complete 6-digit verification code.
+    </string>
+
+    <string name="auth_otp_invalid">
+        The verification code is invalid or has expired.
+    </string>
+
+    <string name="auth_otp_challenge_invalid">
+        This verification request is no longer valid. Go back and sign in again.
+    </string>
+
+    <string name="auth_otp_rate_limited">
+        Too many verification attempts. Try again later.
+    </string>
+
+    <string name="auth_otp_network">
+        Unable to reach PPIS. Check your internet connection.
+    </string>
+
+    <string name="auth_otp_timeout">
+        PPIS took too long to respond. Try again.
+    </string>
+
+    <string name="auth_otp_server">
+        PPIS is temporarily unavailable. Try again.
+    </string>
+
+    <string name="auth_otp_unknown">
+        Verification could not be completed. Try again.
+    </string>
+
+
+    <string name="auth_signup_full_name">
+        Full name
+    </string>
+
+    <string name="auth_signup_confirm_password">
+        Confirm password
+    </string>
+
+    <string name="auth_signup_continue">
+        Continue
+    </string>
+
+    <string name="auth_signup_sending">
+        Sending code…
+    </string>
+
+    <string name="auth_signup_full_name_required">
+        Enter your full name.
+    </string>
+
+    <string name="auth_signup_email_required">
+        Enter your email address.
+    </string>
+
+    <string name="auth_signup_password_required">
+        Enter a password.
+    </string>
+
+    <string name="auth_signup_confirm_required">
+        Confirm your password.
+    </string>
+
+    <string name="auth_signup_password_mismatch">
+        The passwords do not match.
+    </string>
+
+    <string name="auth_signup_email_exists">
+        An account with this email already exists.
+    </string>
+
+    <string name="auth_signup_invalid_input">
+        Check the information you entered.
+    </string>
+
+    <string name="auth_signup_rate_limited">
+        Too many requests. Try again later.
+    </string>
+
+    <string name="auth_signup_network">
+        Unable to reach PPIS. Check your internet connection.
+    </string>
+
+    <string name="auth_signup_timeout">
+        PPIS took too long to respond. Try again.
+    </string>
+
+    <string name="auth_signup_server">
+        PPIS is temporarily unavailable. Try again.
+    </string>
+
+    <string name="auth_signup_unknown">
+        Account creation could not be started. Try again.
+    </string>
+
+    <string name="auth_signup_otp_title">
+        Verify your email
+    </string>
+
+    <string name="auth_signup_otp_description">
+        Enter the 6-digit verification code sent to %1$s.
+    </string>
+
+    <string name="auth_signup_otp_local_expired">
+        This signup session is no longer available on this device. Go back and start signup again.
+    </string>
+
+    <string name="auth_signup_otp_required">
+        Enter the verification code.
+    </string>
+
+    <string name="auth_signup_otp_six_digits">
+        Enter the complete 6-digit verification code.
+    </string>
+
+    <string name="auth_signup_otp_invalid">
+        The verification code is invalid or has expired.
+    </string>
+
+    <string name="auth_signup_challenge_invalid">
+        This verification request is no longer valid. Start signup again.
+    </string>
+
+
+    <string name="auth_reset_email_title">
+        Reset password
+    </string>
+
+    <string name="auth_reset_email_description">
+        Enter the email address associated with your PPIS account.
+    </string>
+
+    <string name="auth_reset_send_code">
+        Send verification code
+    </string>
+
+    <string name="auth_reset_sending_code">
+        Sending code…
+    </string>
+
+    <string name="auth_reset_user_not_found">
+        No PPIS account was found for this email address.
+    </string>
+
+    <string name="auth_reset_no_password">
+        This account does not currently have a password.
+    </string>
+
+    <string name="auth_reset_verify_title">
+        Set a new password
+    </string>
+
+    <string name="auth_reset_verify_description">
+        Enter the code sent to %1$s and choose your new password.
+    </string>
+
+    <string name="auth_reset_new_password">
+        New password
+    </string>
+
+    <string name="auth_reset_confirm_password">
+        Confirm new password
+    </string>
+
+    <string name="auth_reset_password_required">
+        Enter your new password.
+    </string>
+
+    <string name="auth_reset_confirm_required">
+        Confirm your new password.
+    </string>
+
+    <string name="auth_reset_password_too_short">
+        Password must contain at least 8 characters.
+    </string>
+
+    <string name="auth_reset_password_mismatch">
+        The passwords do not match.
+    </string>
+
+    <string name="auth_reset_success_title">
+        Password changed
+    </string>
+
+    <string name="auth_reset_success_description">
+        Your password was reset successfully. Sign in again with your new password.
+    </string>
+
+    <string name="auth_reset_back_to_login">
+        Back to sign in
+    </string>
+
+</resources>
+

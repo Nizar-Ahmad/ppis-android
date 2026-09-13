@@ -1,0 +1,23 @@
+<resources>
+
+    <string name="auth_google_sign_in">
+        Sign in with Google
+    </string>
+
+    <string name="auth_google_no_account">
+        No Google account is available for sign-in on this device.
+    </string>
+
+    <string name="auth_google_invalid">
+        Google could not verify this sign-in. Please try again.
+    </string>
+
+    <string name="auth_google_conflict">
+        This email is already connected to another Google account.
+    </string>
+
+    <string name="auth_google_unavailable">
+        Google sign-in is currently unavailable. Please try again.
+    </string>
+
+</resources>

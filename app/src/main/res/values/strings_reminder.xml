@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="reminder_setup_title">
+        Daily check-in reminder
+    </string>
+
+    <string name="reminder_setup_description">
+        Choose a local time for an optional reminder to review your day and add subjective information such as mood, energy, sleep and focused work.
+    </string>
+
+    <string name="reminder_telemetry_independent_title">
+        Automatic tracking continues separately
+    </string>
+
+    <string name="reminder_telemetry_independent_description">
+        This reminder does not collect activity or screen-time data. PPIS automatic telemetry continues independently in the foreground and background.
+    </string>
+
+    <string name="reminder_time_label">
+        Reminder time
+    </string>
+
+    <string name="reminder_time_help">
+        Use 24-hour HH:mm format, for example 20:30.
+    </string>
+
+    <string name="reminder_enable_button">
+        Enable daily reminder
+    </string>
+
+    <string name="reminder_skip_button">
+        Continue without reminder
+    </string>
+
+    <string name="reminder_error_invalid_time">
+        Enter a valid time from 00:00 to 23:59.
+    </string>
+
+    <string name="reminder_error_permission_denied">
+        Notification permission was not granted. You can allow it and try again, or continue without the reminder.
+    </string>
+
+    <string name="reminder_error_unknown">
+        The reminder could not be saved. Please try again.
+    </string>
+
+    <string name="reminder_notification_title">
+        PPIS daily check-in
+    </string>
+
+    <string name="reminder_notification_text">
+        Review your day and add any optional mood, energy, sleep or focus information.
+    </string>
+
+</resources>

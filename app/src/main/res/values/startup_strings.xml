@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="startup_checking_session">
+        Checking your PPIS session…
+    </string>
+
+    <string name="startup_welcome_title">
+        Welcome to PPIS
+    </string>
+
+    <string name="startup_welcome_description">
+        Personal Pattern Intelligence System for productivity and well-being.
+    </string>
+
+    <string name="startup_auth_next">
+        Sign in and account creation will be connected in the next authentication checkpoint.
+    </string>
+
+    <string name="startup_unavailable_title">
+        PPIS is temporarily unavailable
+    </string>
+
+    <string name="startup_unavailable_description">
+        Your session has been preserved. Check your connection or try again.
+    </string>
+
+    <string name="startup_retry">
+        Retry
+    </string>
+
+    <string name="startup_unsupported_title">
+        Account not supported
+    </string>
+
+    <string name="startup_unsupported_description">
+        The PPIS Android application is available only for standard user accounts.
+    </string>
+
+    <string name="startup_use_different_account">
+        Use a different account
+    </string>
+
+</resources>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="google_health_title">
+        Google Health
+    </string>
+
+    <string name="google_health_description">
+        Optional cloud activity integration. Health Connect remains the primary device activity source for PPIS.
+    </string>
+
+    <string name="google_health_checking">
+        Checking Google Health connection…
+    </string>
+
+    <string name="google_health_not_connected">
+        Not connected
+    </string>
+
+    <string name="google_health_connected">
+        Connected
+    </string>
+
+    <string name="google_health_connect">
+        Connect Google Health
+    </string>
+
+    <string name="google_health_waiting_browser">
+        Complete Google consent in the browser, then return to PPIS.
+    </string>
+
+    <string name="google_health_verifying_connection">
+        Checking whether Google Health was connected…
+    </string>
+
+    <string name="google_health_sync_now">
+        Sync Google Health now
+    </string>
+
+    <string name="google_health_disconnect">
+        Disconnect Google Health
+    </string>
+
+    <string name="google_health_last_sync">
+        Last cloud sync: %1$s
+    </string>
+
+    <string name="google_health_sync_summary">
+        Sync completed — dates checked: %1$d, imported: %2$d, preserved from higher-priority data: %3$d, without Google Health data: %4$d.
+    </string>
+
+    <string name="google_health_status_error">
+        Google Health connection status is temporarily unavailable.
+    </string>
+
+    <string name="google_health_connect_error">
+        Google Health connection could not be started. Try again.
+    </string>
+
+    <string name="google_health_oauth_not_completed">
+        Google Health connection was not completed. You can try connecting again.
+    </string>
+
+    <string name="google_health_sync_error">
+        Google Health could not be synchronized. Other PPIS data sources are unaffected.
+    </string>
+
+    <string name="google_health_disconnect_error">
+        Google Health could not be disconnected. Try again.
+    </string>
+
+    <string name="google_health_retry">
+        Retry
+    </string>
+
+    <string name="google_health_dismiss">
+        Dismiss
+    </string>
+
+</resources>
