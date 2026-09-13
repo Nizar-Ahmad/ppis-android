@@ -28,6 +28,8 @@ import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.thevirtualtrust.ppis.R
+import com.thevirtualtrust.ppis.ui.components.SectionHeader
+import com.thevirtualtrust.ppis.ui.components.StatusChip
 
 
 @Composable
@@ -178,24 +180,13 @@ fun GoogleHealthSection(
             )
     )
 
-    Text(
-        text =
-            stringResource(
-                R.string
-                    .google_health_title
-            ),
-        style =
-            MaterialTheme
-                .typography
-                .titleLarge
+    SectionHeader(
+        title = stringResource(R.string.google_health_title),
+        description = stringResource(R.string.google_health_description)
     )
-
-    Text(
-        text =
-            stringResource(
-                R.string
-                    .google_health_description
-            )
+    StatusChip(
+        label = if (state.status == GoogleHealthUiStatus.CONNECTED) "Connected" else "Not connected",
+        positive = state.status == GoogleHealthUiStatus.CONNECTED
     )
 
     Card(

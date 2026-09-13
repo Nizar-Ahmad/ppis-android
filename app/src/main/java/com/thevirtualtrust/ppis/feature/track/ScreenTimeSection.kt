@@ -29,6 +29,10 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.thevirtualtrust.ppis.R
+import com.thevirtualtrust.ppis.ui.components.LoadingState
+import com.thevirtualtrust.ppis.ui.components.MetricRow
+import com.thevirtualtrust.ppis.ui.components.SectionHeader
+import com.thevirtualtrust.ppis.ui.components.StatusChip
 
 @Composable
 fun ScreenTimeSection(
@@ -67,38 +71,21 @@ fun ScreenTimeSection(
             )
     )
 
-    Text(
-        text =
-            stringResource(
-                R.string
-                    .screen_time_section_title
-            ),
-        style =
-            MaterialTheme
-                .typography
-                .titleLarge
+    SectionHeader(
+        title = stringResource(R.string.screen_time_section_title),
+        description = stringResource(R.string.screen_time_section_description)
     )
 
-    Text(
-        text =
-            stringResource(
-                R.string
-                    .screen_time_section_description
-            )
+    StatusChip(
+        label = if (automaticValuesAvailable) "Automatic data available" else "Automatic source",
+        positive = automaticValuesAvailable
     )
 
     if (
         state.isLoading
     ) {
 
-        CircularProgressIndicator()
-
-        Text(
-            stringResource(
-                R.string
-                    .screen_time_loading
-            )
-        )
+        LoadingState(stringResource(R.string.screen_time_loading))
 
         return
     }
@@ -136,6 +123,15 @@ fun ScreenTimeSection(
         ScreenTimeStatusCard(
             state =
                 state
+        )
+    }
+
+    if (!automaticValuesAvailable) {
+        Text(text = "Manual fallback", style = MaterialTheme.typography.titleMedium)
+        Text(
+            text = "Use these only when screen-time access is unavailable.",
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onSurfaceVariant
         )
     }
 
@@ -485,22 +481,12 @@ private fun DeviceUsageCard(
                                         .titleSmall
                             )
 
-                            topApps
-                                .forEachIndexed {
-                                        index,
-                                        app ->
-
-                                    Text(
-                                        text =
-                                            stringResource(
-                                                R.string
-                                                    .screen_time_top_app_item,
-                                                index + 1,
-                                                app.appLabel,
-                                                app.minutes
-                                            )
-                                    )
-                                }
+                            topApps.forEach { app ->
+                                MetricRow(
+                                    label = app.appLabel,
+                                    value = stringResource(R.string.screen_time_minutes_value, app.minutes)
+                                )
+                            }
                         }
 
                     if (

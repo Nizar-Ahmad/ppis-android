@@ -12,5 +12,6 @@
 
     <string name="screen_time_top_apps_title">Top used apps</string>
     <string name="screen_time_top_app_item">%1$d. %2$s — %3$d min</string>
+    <string name="screen_time_minutes_value">%1$d min</string>
 
 </resources>

@@ -26,6 +26,9 @@ import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.thevirtualtrust.ppis.R
 import com.thevirtualtrust.ppis.data.activity.ActivitySource
+import com.thevirtualtrust.ppis.ui.components.LoadingState
+import com.thevirtualtrust.ppis.ui.components.SectionHeader
+import com.thevirtualtrust.ppis.ui.components.StatusChip
 
 @Composable
 fun ActivitySection(
@@ -65,37 +68,21 @@ fun ActivitySection(
             )
     )
 
-    Text(
-        text =
-            stringResource(
-                R.string.activity_section_title
-            ),
-        style =
-            MaterialTheme
-                .typography
-                .titleLarge
+    SectionHeader(
+        title = stringResource(R.string.activity_section_title),
+        description = stringResource(R.string.activity_section_description)
     )
 
-    Text(
-        text =
-            stringResource(
-                R.string
-                    .activity_section_description
-            )
+    StatusChip(
+        label = if (automaticValuesAvailable) "Automatic data available" else "Automatic source",
+        positive = automaticValuesAvailable
     )
 
     if (
         state.isLoading
     ) {
 
-        CircularProgressIndicator()
-
-        Text(
-            text =
-                stringResource(
-                    R.string.activity_loading
-                )
-        )
+        LoadingState(stringResource(R.string.activity_loading))
 
         return
     }
@@ -138,6 +125,15 @@ fun ActivitySection(
         ActivityStatusCard(
             state =
                 state
+        )
+    }
+
+    if (!automaticValuesAvailable) {
+        Text(text = "Manual fallback", style = MaterialTheme.typography.titleMedium)
+        Text(
+            text = "Use these only when Health Connect data is unavailable.",
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onSurfaceVariant
         )
     }
 

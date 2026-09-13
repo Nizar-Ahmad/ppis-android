@@ -25,6 +25,11 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.thevirtualtrust.ppis.R
+import com.thevirtualtrust.ppis.ui.components.LoadingState
+import com.thevirtualtrust.ppis.ui.components.PPISCard
+import com.thevirtualtrust.ppis.ui.components.PPISSpacing
+import com.thevirtualtrust.ppis.ui.components.SectionHeader
+import com.thevirtualtrust.ppis.ui.components.StatusChip
 
 @Composable
 fun TrackScreen(
@@ -56,7 +61,7 @@ fun TrackScreen(
                 ),
         verticalArrangement =
             Arrangement.spacedBy(
-                14.dp
+                    PPISSpacing.md
             )
     ) {
 
@@ -80,36 +85,18 @@ fun TrackScreen(
 
         HorizontalDivider()
 
-        Text(
-            text =
-                stringResource(
-                    R.string.track_daily_title
-                ),
-            style =
-                MaterialTheme
-                    .typography
-                    .titleLarge
+        SectionHeader(
+            title = stringResource(R.string.track_daily_title),
+            description = stringResource(R.string.track_daily_description)
         )
 
-        Text(
-            text =
-                stringResource(
-                    R.string.track_daily_description
-                )
-        )
+        StatusChip(label = "Manual check-in · optional")
 
         if (
             state.isLoading
         ) {
 
-            CircularProgressIndicator()
-
-            Text(
-                text =
-                    stringResource(
-                        R.string.track_loading
-                    )
-            )
+            LoadingState(stringResource(R.string.track_loading))
 
             return@Column
         }
@@ -123,6 +110,17 @@ fun TrackScreen(
                     state
             )
         }
+
+        Text(
+            text = "How you feel today",
+            style = MaterialTheme.typography.titleMedium
+        )
+
+        Text(
+            text = "These details add context to your report; connected sources continue to update automatically.",
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onSurfaceVariant
+        )
 
         ScaleSelector(
             title =
