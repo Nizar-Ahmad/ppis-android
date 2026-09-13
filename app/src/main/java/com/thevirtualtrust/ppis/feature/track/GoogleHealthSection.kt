@@ -28,6 +28,7 @@ import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.thevirtualtrust.ppis.R
+import com.thevirtualtrust.ppis.data.activity.ActivitySource
 import com.thevirtualtrust.ppis.data.googlehealth.GoogleHealthSyncSummary
 import com.thevirtualtrust.ppis.ui.components.IntegrationHeader
 import com.thevirtualtrust.ppis.ui.components.MetricRow
@@ -37,6 +38,7 @@ import com.thevirtualtrust.ppis.ui.components.StatusChip
 
 @Composable
 fun GoogleHealthSection(
+    activityState: ActivityUiState,
     onSyncCompleted:
         () -> Unit = {},
     viewModel:
@@ -441,6 +443,14 @@ fun GoogleHealthSection(
         state.lastSync?.let { summary ->
             GoogleHealthSyncDataCard(summary)
         }
+
+        if (
+            activityState.dateResolved &&
+            activityState.source == ActivitySource.GOOGLE_HEALTH &&
+            (activityState.steps.isNotBlank() || activityState.activityMinutes.isNotBlank())
+        ) {
+            GoogleHealthActivityDataCard(activityState)
+        }
     }
 }
 
@@ -463,6 +473,29 @@ private fun GoogleHealthSyncDataCard(
         MetricRow(label = "Days without data", value = summary.daysWithoutData.toString())
         if (summary.daysSkipped > 0) {
             MetricRow(label = "Days skipped", value = summary.daysSkipped.toString())
+        }
+    }
+}
+
+@Composable
+private fun GoogleHealthActivityDataCard(
+    activityState: ActivityUiState
+) {
+    PPISCard {
+        Text(
+            text = "Google Health data for today",
+            style = MaterialTheme.typography.titleMedium
+        )
+        Text(
+            text = "Values imported from your connected Google Health account.",
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onSurfaceVariant
+        )
+        activityState.steps.takeIf { it.isNotBlank() }?.let { steps ->
+            MetricRow(label = "Steps", value = steps)
+        }
+        activityState.activityMinutes.takeIf { it.isNotBlank() }?.let { minutes ->
+            MetricRow(label = "Active minutes", value = "$minutes min")
         }
     }
 }

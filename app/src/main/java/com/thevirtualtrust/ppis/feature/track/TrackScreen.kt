@@ -63,6 +63,10 @@ fun TrackScreen(
         ActivityViewModel =
         hiltViewModel()
 
+    val activityState by
+        activityViewModel.uiState
+            .collectAsStateWithLifecycle()
+
 
     Column(
         modifier =
@@ -362,6 +366,7 @@ fun TrackScreen(
         CalendarSection()
         GoogleCalendarSection()
         GoogleHealthSection(
+            activityState = activityState,
             onSyncCompleted = {
                 activityViewModel.retry()
             }
