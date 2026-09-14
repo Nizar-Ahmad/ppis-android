@@ -22,6 +22,8 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.thevirtualtrust.ppis.R
+import com.thevirtualtrust.ppis.ui.components.IntegrationHeader
+import com.thevirtualtrust.ppis.ui.components.StatusChip
 
 @Composable
 fun CalendarSection(
@@ -53,24 +55,19 @@ fun CalendarSection(
             )
     )
 
-    Text(
-        text =
-            stringResource(
-                R.string
-                    .calendar_section_title
-            ),
-        style =
-            MaterialTheme
-                .typography
-                .titleLarge
+    IntegrationHeader(
+        title = stringResource(R.string.calendar_section_title),
+        description = stringResource(R.string.calendar_section_description),
+        iconRes = R.drawable.ic_integration_device_calendar
     )
-
-    Text(
-        text =
-            stringResource(
-                R.string
-                    .calendar_section_description
-            )
+    StatusChip(
+        label = when (state.status) {
+            CalendarUiStatus.READY -> "Local calendar connected"
+            CalendarUiStatus.PERMISSION_REQUIRED -> "Permission required"
+            CalendarUiStatus.CHECKING -> "Checking calendar"
+            CalendarUiStatus.READ_FAILED -> "Calendar unavailable"
+        },
+        positive = state.status == CalendarUiStatus.READY
     )
 
     Card(

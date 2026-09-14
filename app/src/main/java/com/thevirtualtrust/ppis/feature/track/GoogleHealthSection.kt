@@ -28,10 +28,17 @@ import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.thevirtualtrust.ppis.R
+import com.thevirtualtrust.ppis.data.activity.ActivitySource
+import com.thevirtualtrust.ppis.data.googlehealth.GoogleHealthSyncSummary
+import com.thevirtualtrust.ppis.ui.components.IntegrationHeader
+import com.thevirtualtrust.ppis.ui.components.MetricRow
+import com.thevirtualtrust.ppis.ui.components.PPISCard
+import com.thevirtualtrust.ppis.ui.components.StatusChip
 
 
 @Composable
 fun GoogleHealthSection(
+    activityState: ActivityUiState,
     onSyncCompleted:
         () -> Unit = {},
     viewModel:
@@ -178,24 +185,14 @@ fun GoogleHealthSection(
             )
     )
 
-    Text(
-        text =
-            stringResource(
-                R.string
-                    .google_health_title
-            ),
-        style =
-            MaterialTheme
-                .typography
-                .titleLarge
+    IntegrationHeader(
+        title = stringResource(R.string.google_health_title),
+        description = stringResource(R.string.google_health_description),
+        iconRes = R.drawable.google_health
     )
-
-    Text(
-        text =
-            stringResource(
-                R.string
-                    .google_health_description
-            )
+    StatusChip(
+        label = if (state.status == GoogleHealthUiStatus.CONNECTED) "Connected" else "Not connected",
+        positive = state.status == GoogleHealthUiStatus.CONNECTED
     )
 
     Card(
@@ -322,22 +319,6 @@ fun GoogleHealthSection(
                             )
                         }
 
-                    state.lastSync
-                        ?.let {
-                                summary ->
-
-                            Text(
-                                stringResource(
-                                    R.string
-                                        .google_health_sync_summary,
-                                    summary.daysRequested,
-                                    summary.daysImported,
-                                    summary.daysSkipped,
-                                    summary.daysWithoutData
-                                )
-                            )
-                        }
-
                     Button(
                         modifier =
                             Modifier.fillMaxWidth(),
@@ -455,6 +436,66 @@ fun GoogleHealthSection(
                         )
                     }
                 }
+        }
+    }
+
+    if (state.status == GoogleHealthUiStatus.CONNECTED) {
+        state.lastSync?.let { summary ->
+            GoogleHealthSyncDataCard(summary)
+        }
+
+        if (
+            activityState.dateResolved &&
+            activityState.source == ActivitySource.GOOGLE_HEALTH &&
+            (activityState.steps.isNotBlank() || activityState.activityMinutes.isNotBlank())
+        ) {
+            GoogleHealthActivityDataCard(activityState)
+        }
+    }
+}
+
+@Composable
+private fun GoogleHealthSyncDataCard(
+    summary: GoogleHealthSyncSummary
+) {
+    PPISCard(containerColor = MaterialTheme.colorScheme.surfaceVariant) {
+        Text(
+            text = "Latest Google Health sync",
+            style = MaterialTheme.typography.titleMedium
+        )
+        Text(
+            text = "Imported daily health records from the most recent sync.",
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onSurfaceVariant
+        )
+        MetricRow(label = "Days requested", value = summary.daysRequested.toString())
+        MetricRow(label = "Days imported", value = summary.daysImported.toString())
+        MetricRow(label = "Days without data", value = summary.daysWithoutData.toString())
+        if (summary.daysSkipped > 0) {
+            MetricRow(label = "Days skipped", value = summary.daysSkipped.toString())
+        }
+    }
+}
+
+@Composable
+private fun GoogleHealthActivityDataCard(
+    activityState: ActivityUiState
+) {
+    PPISCard {
+        Text(
+            text = "Google Health data for today",
+            style = MaterialTheme.typography.titleMedium
+        )
+        Text(
+            text = "Values imported from your connected Google Health account.",
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onSurfaceVariant
+        )
+        activityState.steps.takeIf { it.isNotBlank() }?.let { steps ->
+            MetricRow(label = "Steps", value = steps)
+        }
+        activityState.activityMinutes.takeIf { it.isNotBlank() }?.let { minutes ->
+            MetricRow(label = "Active minutes", value = "$minutes min")
         }
     }
 }

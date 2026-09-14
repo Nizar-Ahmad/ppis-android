@@ -1,57 +1,43 @@
 package com.thevirtualtrust.ppis.ui.theme
 
-import android.app.Activity
-import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
-import androidx.compose.material3.dynamicDarkColorScheme
-import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.graphics.Color
 
 private val DarkColorScheme = darkColorScheme(
-    primary = Purple80,
-    secondary = PurpleGrey80,
-    tertiary = Pink80
+    primary = Color(0xFF6FC4FF), onPrimary = Color(0xFF003258),
+    primaryContainer = Color(0xFF004B78), onPrimaryContainer = Color(0xFFD1EAFF),
+    secondary = Color(0xFF62D7BE), onSecondary = Color(0xFF00382F),
+    secondaryContainer = Color(0xFF005145), onSecondaryContainer = Color(0xFF8DF8DB),
+    tertiary = Color(0xFF8EE6A5), background = PpisDarkBackground,
+    onBackground = PpisDarkInk, surface = PpisDarkSurface, onSurface = PpisDarkInk,
+    surfaceVariant = PpisDarkSurfaceVariant, onSurfaceVariant = PpisDarkMuted,
+    outline = PpisDarkOutline, error = Color(0xFFFFB4AB), onError = Color(0xFF690005),
+    errorContainer = Color(0xFF93000A), onErrorContainer = Color(0xFFFFDAD6)
 )
 
 private val LightColorScheme = lightColorScheme(
-    primary = Purple40,
-    secondary = PurpleGrey40,
-    tertiary = Pink40
-
-    /* Other default colors to override
-    background = Color(0xFFFFFBFE),
-    surface = Color(0xFFFFFBFE),
-    onPrimary = Color.White,
-    onSecondary = Color.White,
-    onTertiary = Color.White,
-    onBackground = Color(0xFF1C1B1F),
-    onSurface = Color(0xFF1C1B1F),
-    */
+    primary = PpisNavy, onPrimary = Color.White,
+    primaryContainer = Color(0xFFD4E7FF), onPrimaryContainer = Color(0xFF001D35),
+    secondary = PpisTeal, onSecondary = Color.White,
+    secondaryContainer = Color(0xFFC1F1E8), onSecondaryContainer = Color(0xFF00201C),
+    tertiary = Color(0xFF277A43), background = PpisBackground, onBackground = PpisInk,
+    surface = PpisSurface, onSurface = PpisInk, surfaceVariant = PpisSurfaceVariant,
+    onSurfaceVariant = PpisMuted, outline = PpisOutline, error = PpisError,
+    onError = Color.White, errorContainer = Color(0xFFFFDAD6), onErrorContainer = Color(0xFF410002)
 )
 
 @Composable
 fun PPISTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    // Dynamic color is available on Android 12+
-    dynamicColor: Boolean = true,
+    dynamicColor: Boolean = false,
     content: @Composable () -> Unit
 ) {
-    val colorScheme = when {
-        dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
-            val context = LocalContext.current
-            if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
-        }
-
-        darkTheme -> DarkColorScheme
-        else -> LightColorScheme
-    }
-
     MaterialTheme(
-        colorScheme = colorScheme,
+        colorScheme = if (darkTheme) DarkColorScheme else LightColorScheme,
         typography = Typography,
         content = content
     )

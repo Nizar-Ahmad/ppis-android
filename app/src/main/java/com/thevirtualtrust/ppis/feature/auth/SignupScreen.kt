@@ -23,6 +23,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.thevirtualtrust.ppis.R
+import com.thevirtualtrust.ppis.ui.components.ppisOutlinedTextFieldColors
 
 @Composable
 fun SignupScreen(
@@ -87,6 +88,7 @@ fun SignupScreen(
                     )
                 )
             },
+            colors = ppisOutlinedTextFieldColors(),
             keyboardOptions =
                 KeyboardOptions(
                     imeAction =
@@ -111,6 +113,7 @@ fun SignupScreen(
                     )
                 )
             },
+            colors = ppisOutlinedTextFieldColors(),
             keyboardOptions =
                 KeyboardOptions(
                     keyboardType =
@@ -168,6 +171,7 @@ fun SignupScreen(
                     )
                 }
             },
+            colors = ppisOutlinedTextFieldColors(),
             keyboardOptions =
                 KeyboardOptions(
                     keyboardType =
@@ -228,6 +232,7 @@ fun SignupScreen(
                     )
                 }
             },
+            colors = ppisOutlinedTextFieldColors(),
             keyboardOptions =
                 KeyboardOptions(
                     keyboardType =

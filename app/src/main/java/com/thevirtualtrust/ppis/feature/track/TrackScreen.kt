@@ -1,11 +1,14 @@
 package com.thevirtualtrust.ppis.feature.track
 
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
@@ -15,16 +18,34 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Slider
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.CornerRadius
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.thevirtualtrust.ppis.R
+import com.thevirtualtrust.ppis.ui.components.LoadingState
+import com.thevirtualtrust.ppis.ui.components.PPISCard
+import com.thevirtualtrust.ppis.ui.components.PPISPageHeader
+import com.thevirtualtrust.ppis.ui.components.PPISSpacing
+import com.thevirtualtrust.ppis.ui.components.SectionHeader
+import com.thevirtualtrust.ppis.ui.components.StatusChip
+import java.util.Locale
 
 @Composable
 fun TrackScreen(
@@ -42,6 +63,10 @@ fun TrackScreen(
         ActivityViewModel =
         hiltViewModel()
 
+    val activityState by
+        activityViewModel.uiState
+            .collectAsStateWithLifecycle()
+
 
     Column(
         modifier =
@@ -56,60 +81,29 @@ fun TrackScreen(
                 ),
         verticalArrangement =
             Arrangement.spacedBy(
-                14.dp
+                    PPISSpacing.md
             )
     ) {
 
-        Text(
-            text =
-                stringResource(
-                    R.string.track_title
-                ),
-            style =
-                MaterialTheme
-                    .typography
-                    .headlineMedium
-        )
-
-        Text(
-            text =
-                stringResource(
-                    R.string.track_description
-                )
+        PPISPageHeader(
+            title = stringResource(R.string.track_title),
+            description = stringResource(R.string.track_description)
         )
 
         HorizontalDivider()
 
-        Text(
-            text =
-                stringResource(
-                    R.string.track_daily_title
-                ),
-            style =
-                MaterialTheme
-                    .typography
-                    .titleLarge
+        SectionHeader(
+            title = stringResource(R.string.track_daily_title),
+            description = stringResource(R.string.track_daily_description)
         )
 
-        Text(
-            text =
-                stringResource(
-                    R.string.track_daily_description
-                )
-        )
+        StatusChip(label = "Manual check-in · optional")
 
         if (
             state.isLoading
         ) {
 
-            CircularProgressIndicator()
-
-            Text(
-                text =
-                    stringResource(
-                        R.string.track_loading
-                    )
-            )
+            LoadingState(stringResource(R.string.track_loading))
 
             return@Column
         }
@@ -124,6 +118,17 @@ fun TrackScreen(
             )
         }
 
+        Text(
+            text = "How you feel today",
+            style = MaterialTheme.typography.titleMedium
+        )
+
+        Text(
+            text = "These details add context to your report; connected sources continue to update automatically.",
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onSurfaceVariant
+        )
+
         ScaleSelector(
             title =
                 stringResource(
@@ -136,6 +141,8 @@ fun TrackScreen(
                 ),
             selected =
                 state.mood,
+            style = CheckInScale.MOOD,
+            labels = listOf("Very low", "Low", "Okay", "Good", "Great"),
             enabled =
                 state.canEdit,
             onSelected =
@@ -154,70 +161,28 @@ fun TrackScreen(
                 ),
             selected =
                 state.energyLevel,
+            style = CheckInScale.ENERGY,
+            labels = listOf("Drained", "Low", "Okay", "High", "Full"),
             enabled =
                 state.canEdit,
             onSelected =
                 viewModel::onEnergyChanged
         )
 
-        OutlinedTextField(
-            modifier =
-                Modifier.fillMaxWidth(),
-            value =
-                state.sleepHours,
-            onValueChange =
-                viewModel::
-                    onSleepHoursChanged,
-            enabled =
-                state.canEdit,
-            singleLine =
-                true,
-            label = {
-                Text(
-                    stringResource(
-                        R.string
-                            .track_sleep_hours
-                    )
-                )
-            },
-            placeholder = {
-                Text(
-                    stringResource(
-                        R.string
-                            .track_sleep_hint
-                    )
-                )
-            }
+        DurationSelector(
+            title = stringResource(R.string.track_sleep_hours),
+            description = stringResource(R.string.track_sleep_hint),
+            value = state.sleepHours,
+            enabled = state.canEdit,
+            onValueChange = viewModel::onSleepHoursChanged
         )
 
-        OutlinedTextField(
-            modifier =
-                Modifier.fillMaxWidth(),
-            value =
-                state.focusedWorkHours,
-            onValueChange =
-                viewModel::
-                    onFocusedWorkHoursChanged,
-            enabled =
-                state.canEdit,
-            singleLine =
-                true,
-            label = {
-                Text(
-                    stringResource(
-                        R.string
-                            .track_focus_hours
-                    )
-                )
-            },
-            placeholder = {
-                Text(
-                    stringResource(
-                        R.string
-                            .track_focus_hint
-                    )
-                )
-            }
+        DurationSelector(
+            title = stringResource(R.string.track_focus_hours),
+            description = stringResource(R.string.track_focus_hint),
+            value = state.focusedWorkHours,
+            enabled = state.canEdit,
+            onValueChange = viewModel::onFocusedWorkHoursChanged
         )
 
         OutlinedTextField(
@@ -381,14 +346,27 @@ fun TrackScreen(
                 )
             }
         }
+
+        SectionHeader(
+            title = "Automatically tracked today",
+            description = "Device activity and screen time are collected from connected sources."
+        )
+
         ActivitySection(
             viewModel =
                 activityViewModel
         )
         ScreenTimeSection()
+
+        SectionHeader(
+            title = "Data sources & connections",
+            description = "Manage optional calendar and health connections when you need them."
+        )
+
         CalendarSection()
         GoogleCalendarSection()
         GoogleHealthSection(
+            activityState = activityState,
             onSyncCompleted = {
                 activityViewModel.retry()
             }
@@ -454,30 +432,49 @@ private fun DailyStatusCard(
 }
 
 @Composable
+private fun DurationSelector(
+    title: String,
+    description: String,
+    value: String,
+    enabled: Boolean,
+    onValueChange: (String) -> Unit
+) {
+    val parsed = value.toFloatOrNull()?.coerceIn(0f, 24f)
+    val sliderValue = parsed ?: 0f
+    Column(verticalArrangement = Arrangement.spacedBy(PPISSpacing.xxs)) {
+        Row(verticalAlignment = androidx.compose.ui.Alignment.CenterVertically) {
+            Column(modifier = Modifier.weight(1f)) {
+                Text(title, style = MaterialTheme.typography.titleMedium)
+                Text(description, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            }
+            Text(
+                text = parsed?.let { String.format(Locale.US, "%.1f h", it) } ?: "Not set",
+                style = MaterialTheme.typography.titleLarge
+            )
+        }
+        Slider(
+            value = sliderValue,
+            onValueChange = { selected -> onValueChange(String.format(Locale.US, "%.1f", selected)) },
+            valueRange = 0f..24f,
+            steps = 47,
+            enabled = enabled
+        )
+    }
+}
+
+@Composable
 private fun ScaleSelector(
     title: String,
     description: String,
     selected: Int,
+    style: CheckInScale,
+    labels: List<String>,
     enabled: Boolean,
     onSelected:
         (Int) -> Unit
 ) {
 
-    Card(
-        modifier =
-            Modifier.fillMaxWidth()
-    ) {
-
-        Column(
-            modifier =
-                Modifier.padding(
-                    16.dp
-                ),
-            verticalArrangement =
-                Arrangement.spacedBy(
-                    8.dp
-                )
-        ) {
+    PPISCard {
 
             Text(
                 text =
@@ -505,16 +502,19 @@ private fun ScaleSelector(
                 (1..5).forEach {
                         value ->
 
-                    if (
-                        selected ==
-                            value
-                    ) {
+                    val accessibilityLabel = labels.getOrElse(value - 1) { scaleLabel(value) }
+                    val isSelected = selected == value
+
+                    if (isSelected) {
 
                         Button(
                             modifier =
-                                Modifier.weight(
-                                    1f
-                                ),
+                                Modifier
+                                    .weight(1f)
+                                    .heightIn(min = 52.dp)
+                                    .semantics {
+                                        contentDescription = "$title: $accessibilityLabel, selected"
+                                    },
                             enabled =
                                 enabled,
                             onClick = {
@@ -524,20 +524,19 @@ private fun ScaleSelector(
                             }
                         ) {
 
-                            Text(
-                                text =
-                                    value
-                                        .toString()
-                            )
+                            CheckInRatingGlyph(style, value, true)
                         }
 
                     } else {
 
                         OutlinedButton(
                             modifier =
-                                Modifier.weight(
-                                    1f
-                                ),
+                                Modifier
+                                    .weight(1f)
+                                    .heightIn(min = 52.dp)
+                                    .semantics {
+                                        contentDescription = "$title: $accessibilityLabel"
+                                    },
                             enabled =
                                 enabled,
                             onClick = {
@@ -547,21 +546,76 @@ private fun ScaleSelector(
                             }
                         ) {
 
-                            Text(
-                                text =
-                                    value
-                                        .toString()
-                            )
+                            CheckInRatingGlyph(style, value, false)
                         }
                     }
                 }
             }
 
             Text(
-                text =
-                    scaleLabel(
-                        selected
-                    )
+                text = "$title: ${labels.getOrElse(selected - 1) { scaleLabel(selected) }}",
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+    }
+}
+
+private enum class CheckInScale {
+    MOOD,
+    ENERGY
+}
+
+@Composable
+private fun CheckInRatingGlyph(
+    style: CheckInScale,
+    value: Int,
+    selected: Boolean
+) {
+    val tint = if (selected) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.primary
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        when (style) {
+            CheckInScale.MOOD -> MoodGlyph(value, tint)
+            CheckInScale.ENERGY -> EnergyGlyph(value, tint)
+        }
+        Text(text = value.toString(), style = MaterialTheme.typography.labelSmall)
+    }
+}
+
+@Composable
+private fun MoodGlyph(level: Int, color: Color) {
+    Canvas(modifier = Modifier.size(24.dp)) {
+        val stroke = Stroke(width = size.minDimension * 0.075f, cap = StrokeCap.Round)
+        drawCircle(color = color, radius = size.minDimension * 0.41f, style = stroke)
+        drawCircle(color = color, radius = size.minDimension * 0.045f, center = Offset(size.width * 0.37f, size.height * 0.40f))
+        drawCircle(color = color, radius = size.minDimension * 0.045f, center = Offset(size.width * 0.63f, size.height * 0.40f))
+        val mouth = Path().apply {
+            moveTo(size.width * 0.30f, size.height * 0.69f)
+            val controlY = when (level) {
+                1 -> size.height * 0.49f
+                2 -> size.height * 0.57f
+                3 -> size.height * 0.69f
+                4 -> size.height * 0.80f
+                else -> size.height * 0.88f
+            }
+            quadraticTo(size.width * 0.50f, controlY, size.width * 0.70f, size.height * 0.69f)
+        }
+        drawPath(path = mouth, color = color, style = stroke)
+    }
+}
+
+@Composable
+private fun EnergyGlyph(level: Int, color: Color) {
+    Canvas(modifier = Modifier.size(24.dp)) {
+        val barWidth = size.width * 0.12f
+        val gap = size.width * 0.06f
+        repeat(5) { index ->
+            val height = size.height * (0.26f + index * 0.13f)
+            val left = size.width * 0.10f + index * (barWidth + gap)
+            drawRoundRect(
+                color = if (index < level) color else color.copy(alpha = 0.24f),
+                topLeft = Offset(left, size.height - height - size.height * 0.12f),
+                size = Size(barWidth, height),
+                cornerRadius = CornerRadius(barWidth / 2f, barWidth / 2f)
             )
         }
     }
