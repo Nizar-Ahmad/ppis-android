@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CircularProgressIndicator
@@ -18,6 +17,9 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -26,6 +28,10 @@ import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.thevirtualtrust.ppis.R
 import com.thevirtualtrust.ppis.data.auth.session.AuthSessionInfo
+import com.thevirtualtrust.ppis.ui.components.SectionHeader
+import com.thevirtualtrust.ppis.ui.components.PPISPageHeader
+import com.thevirtualtrust.ppis.ui.components.PPISCard
+import com.thevirtualtrust.ppis.ui.components.PPISSpacing
 
 @Composable
 fun ProfileScreen(
@@ -69,16 +75,9 @@ fun ProfileScreen(
                     )
             ) {
 
-                Text(
-                    stringResource(
-                        R.string.profile_title
-                    )
-                )
-
-                Text(
-                    stringResource(
-                        R.string.profile_description
-                    )
+                PPISPageHeader(
+                    title = stringResource(R.string.profile_title),
+                    description = stringResource(R.string.profile_description)
                 )
             }
         }
@@ -97,9 +96,8 @@ fun ProfileScreen(
         item {
 
             Text(
-                stringResource(
-                    R.string.profile_account_title
-                )
+                stringResource(R.string.profile_account_title),
+                style = androidx.compose.material3.MaterialTheme.typography.titleLarge
             )
         }
 
@@ -203,9 +201,8 @@ fun ProfileScreen(
         item {
 
             Text(
-                stringResource(
-                    R.string.profile_personal_title
-                )
+                stringResource(R.string.profile_personal_title),
+                style = androidx.compose.material3.MaterialTheme.typography.titleLarge
             )
         }
 
@@ -768,31 +765,13 @@ fun ProfileScreen(
 
         } else {
 
-            items(
-                items =
-                    state.sessions,
-                key = {
-                    it.id
-                }
-            ) { session ->
-
-                SessionCard(
-                    session =
-                        session,
-                    busy =
-                        state.isBusy,
-                    revoking =
-                        state.action ==
-                            ProfileSessionAction
-                                .REVOKING_SESSION &&
-                            state.actionSessionId ==
-                                session.id,
-                    onRevoke = {
-                        viewModel
-                            .revokeSession(
-                                session.id
-                            )
-                    }
+            item {
+                SessionsPanel(
+                    sessions = state.sessions,
+                    busy = state.isBusy,
+                    action = state.action,
+                    actionSessionId = state.actionSessionId,
+                    onRevoke = viewModel::revokeSession
                 )
             }
         }
@@ -1104,132 +1083,76 @@ private fun SettingSwitch(
 }
 
 @Composable
-private fun SessionCard(
+private fun SessionsPanel(
+    sessions: List<AuthSessionInfo>,
+    busy: Boolean,
+    action: ProfileSessionAction,
+    actionSessionId: String?,
+    onRevoke: (String) -> Unit
+) {
+    var expanded by rememberSaveable { mutableStateOf(false) }
+    val visibleSessions = if (expanded) sessions else sessions.take(2)
+
+    PPISCard {
+        visibleSessions.forEachIndexed { index, session ->
+            SessionRow(
+                session = session,
+                busy = busy,
+                revoking = action == ProfileSessionAction.REVOKING_SESSION && actionSessionId == session.id,
+                onRevoke = { onRevoke(session.id) }
+            )
+            if (index < visibleSessions.lastIndex) {
+                HorizontalDivider()
+            }
+        }
+
+        if (sessions.size > 2) {
+            TextButton(onClick = { expanded = !expanded }) {
+                Text(
+                    if (expanded) {
+                        stringResource(R.string.profile_show_fewer_sessions)
+                    } else {
+                        stringResource(R.string.profile_show_more_sessions, sessions.size - 2)
+                    }
+                )
+            }
+        }
+    }
+}
+
+@Composable
+private fun SessionRow(
     session: AuthSessionInfo,
     busy: Boolean,
     revoking: Boolean,
     onRevoke: () -> Unit
 ) {
-
-    Card(
-        modifier =
-            Modifier.fillMaxWidth()
-    ) {
-
-        Column(
-            modifier =
-                Modifier.padding(
-                    16.dp
-                ),
-            verticalArrangement =
-                Arrangement.spacedBy(
-                    6.dp
-                )
-        ) {
-
-            Text(
-                when {
-
-                    session.isCurrent ->
-                        stringResource(
-                            R.string.profile_current_device
-                        )
-
-                    session.deviceName
-                        ?.isNotBlank() == true ->
-                        session.deviceName
-
-                    else ->
-                        stringResource(
-                            R.string.profile_unknown_device
-                        )
-                }
-            )
-
-            if (
-                session.isCurrent &&
-                !session.deviceName
-                    .isNullOrBlank()
-            ) {
-
-                Text(
-                    session.deviceName
-                )
-            }
-
-            Text(
-                stringResource(
-                    if (
-                        session.isRevoked
-                    ) {
-                        R.string.profile_revoked_session
-                    } else {
-                        R.string.profile_active_session
-                    }
-                )
-            )
-
-            Text(
-                stringResource(
-                    R.string.profile_client,
-                    session.clientType
-                )
-            )
-
-            session.appVersion
-                ?.takeIf {
-                    it.isNotBlank()
-                }
-                ?.let {
-                        appVersion ->
-
-                    Text(
-                        stringResource(
-                            R.string.profile_app_version,
-                            appVersion
-                        )
-                    )
-                }
-
-            Text(
-                stringResource(
-                    R.string.profile_last_seen,
-                    session.lastSeenAt
-                )
-            )
-
-            Text(
-                stringResource(
-                    R.string.profile_created,
-                    session.createdAt
-                )
-            )
-
-            if (
-                !session.isCurrent &&
-                !session.isRevoked
-            ) {
-
-                OutlinedButton(
-                    enabled =
-                        !busy,
-                    onClick =
-                        onRevoke
-                ) {
-
-                    Text(
-                        stringResource(
-                            if (
-                                revoking
-                            ) {
-                                R.string.profile_revoking
-                            } else {
-                                R.string
-                                    .profile_revoke_session
-                            }
-                        )
-                    )
-                }
+    Column(verticalArrangement = Arrangement.spacedBy(PPISSpacing.xxs)) {
+        Text(
+            text = when {
+                session.isCurrent -> stringResource(R.string.profile_current_device)
+                session.deviceName?.isNotBlank() == true -> session.deviceName
+                else -> stringResource(R.string.profile_unknown_device)
+            },
+            style = androidx.compose.material3.MaterialTheme.typography.titleMedium
+        )
+        Text(
+            text = stringResource(
+                if (session.isRevoked) R.string.profile_revoked_session else R.string.profile_active_session
+            ),
+            style = androidx.compose.material3.MaterialTheme.typography.bodySmall
+        )
+        Text(
+            text = stringResource(R.string.profile_client, session.clientType),
+            style = androidx.compose.material3.MaterialTheme.typography.bodySmall
+        )
+        Text(
+            text = stringResource(R.string.profile_last_seen, session.lastSeenAt),
+            style = androidx.compose.material3.MaterialTheme.typography.bodySmall
+        )
+        if (!session.isCurrent && !session.isRevoked) {
+            OutlinedButton(onClick = onRevoke, enabled = !busy) {
+                Text(stringResource(if (revoking) R.string.profile_revoking else R.string.profile_revoke_session))
             }
         }
     }
